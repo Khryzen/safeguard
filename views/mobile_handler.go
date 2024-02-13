@@ -4,14 +4,13 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/mbdeguzman/safeguard/models"
 	"github.com/uadmin/uadmin"
 )
 
 func MobileHandler(w http.ResponseWriter, r *http.Request) {
 	session := uadmin.IsAuthenticated(r)
 	if session == nil {
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		http.Redirect(w, r, "/login/", http.StatusSeeOther)
 		return
 	}
 
@@ -27,13 +26,6 @@ func MobileHandler(w http.ResponseWriter, r *http.Request) {
 		page = "dashboard"
 		context = MobileDashboardHandler(w, r)
 	}
-
-	enforcer := models.Enforcers{}
-	uadmin.Get(&enforcer, "user_id = ?", session.UserID)
-	position := ""
-
-	context["User"] = session.User
-	context["Position"] = position
 	MobileRender(w, r, page, context)
 }
 

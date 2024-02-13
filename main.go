@@ -16,11 +16,11 @@ func main() {
 		models.Protocols{},
 	)
 
-	http.HandleFunc("/", views.MobileHandler)
 	http.HandleFunc("/login/", views.LoginHandler)
+	http.HandleFunc("/", views.MobileHandler)
 
-	http.HandleFunc("/console/login/", views.ConsoleLoginHandler)
 	http.HandleFunc("/console/", views.ConsoleHandler)
+	http.HandleFunc("/console/login/", views.ConsoleLoginHandler)
 
 	uadmin.Port = 8080
 	uadmin.RootURL = "/uadmin/"

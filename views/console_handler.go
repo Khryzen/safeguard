@@ -11,7 +11,7 @@ import (
 func ConsoleHandler(w http.ResponseWriter, r *http.Request) {
 	session := uadmin.IsAuthenticated(r)
 	if session == nil {
-		http.Redirect(w, r, "/console/login", http.StatusSeeOther)
+		http.Redirect(w, r, "/console/login/", http.StatusSeeOther)
 		return
 	}
 

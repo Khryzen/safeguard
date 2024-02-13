@@ -9,7 +9,6 @@ import (
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	// Check if there is an existing session
-	fmt.Println("Loginhandler")
 	session := uadmin.IsAuthenticated(r)
 	if session != nil {
 		http.Redirect(w, r, "/dashboard/", http.StatusSeeOther)
@@ -47,4 +46,3 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		"Title": "Login - MDRRMO System",
 	})
 }
-

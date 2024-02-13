@@ -17,6 +17,8 @@ func main() {
 	)
 
 	http.HandleFunc("/", views.MobileHandler)
+	http.HandleFunc("/login/", views.LoginHandler)
+	http.HandleFunc("/console/login/", views.ConsoleLoginHandler)
 	http.HandleFunc("/console/", views.ConsoleHandler)
 
 	uadmin.Port = 8080

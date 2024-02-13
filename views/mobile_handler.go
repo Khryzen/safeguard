@@ -14,6 +14,7 @@ func MobileHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	r.URL.Path = strings.TrimPrefix(r.URL.Path, "/mobile/")
 	page := strings.TrimSuffix(r.URL.Path, "/")
 
 	// Define the context that will receive the page context from the handler

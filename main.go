@@ -17,7 +17,9 @@ func main() {
 	)
 
 	http.HandleFunc("/login/", views.LoginHandler)
-	http.HandleFunc("/", views.MobileHandler)
+	http.HandleFunc("/mobile/", views.MobileHandler)
+
+	http.HandleFunc("/", views.IndexHandler)
 
 	http.HandleFunc("/console/", views.ConsoleHandler)
 	http.HandleFunc("/console/login/", views.ConsoleLoginHandler)

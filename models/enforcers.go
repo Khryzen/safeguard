@@ -9,3 +9,9 @@ type Enforcers struct {
 	Position string
 	Active   bool
 }
+
+func (e *Enforcers) String() string {
+	uadmin.Preload(e)
+
+	return e.User.FirstName + " " + e.User.LastName
+}

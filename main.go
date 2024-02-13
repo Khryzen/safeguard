@@ -1,9 +1,23 @@
 package main
 
-import "github.com/uadmin/uadmin"
+import (
+	"net/http"
+
+	"github.com/mbdeguzman/safeguard/models"
+	"github.com/mbdeguzman/safeguard/views"
+	"github.com/uadmin/uadmin"
+)
 
 func main() {
-	uadmin.Register()
+	uadmin.Register(
+		models.AlertLevel{},
+		models.Disasters{},
+		models.Enforcers{},
+		models.Protocols{},
+	)
+
+	http.HandleFunc("/", views.MobileHandler)
+	http.HandleFunc("/console/", views.ConsoleHandler)
 
 	uadmin.Port = 8080
 	uadmin.RootURL = "/uadmin/"

@@ -16,13 +16,14 @@ func main() {
 		models.Protocols{},
 	)
 
-	http.HandleFunc("/login/", views.LoginHandler)
-	http.HandleFunc("/mobile/", views.MobileHandler)
+	http.HandleFunc("/login/", uadmin.Handler(views.LoginHandler))
+	http.HandleFunc("/mobile/", uadmin.Handler(views.MobileHandler))
 
-	http.HandleFunc("/", views.IndexHandler)
+	http.HandleFunc("/", uadmin.Handler(views.IndexHandler))
 
-	http.HandleFunc("/console/", views.ConsoleHandler)
-	http.HandleFunc("/console/login/", views.ConsoleLoginHandler)
+	http.HandleFunc("/console/", uadmin.Handler(views.ConsoleHandler))
+	http.HandleFunc("/console/login/", uadmin.Handler(views.ConsoleLoginHandler))
+	http.HandleFunc("/logout/", uadmin.Handler(views.LogoutHandler))
 
 	uadmin.Port = 8080
 	uadmin.RootURL = "/uadmin/"

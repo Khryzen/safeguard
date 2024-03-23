@@ -36,3 +36,24 @@ func ProtocolsHandler(w http.ResponseWriter, r *http.Request) map[string]interfa
 	context["Title"] = "Protocols"
 	return context
 }
+
+func IncidentReportHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
+	context := map[string]interface{}{}
+
+	context["Title"] = "Incident Reports"
+	return context
+}
+
+func EnforcerTypeHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
+	context := map[string]interface{}{}
+
+	context["Title"] = "Enforcer Types"
+	return context
+}
+
+func SettingsHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
+	context := map[string]interface{}{}
+
+	context["Title"] = "Settings"
+	return context
+}

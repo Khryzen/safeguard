@@ -28,6 +28,16 @@ func ConsoleHandler(w http.ResponseWriter, r *http.Request) {
 		context = EnforcerHandler(w, r)
 	case "disasters":
 		context = DisasterHandler(w, r)
+	case "alerts":
+		context = AlertLevelHandler(w, r)
+	case "protocols":
+		context = ProtocolsHandler(w, r)
+	case "settings":
+		context = SettingsHandler(w, r)
+	case "incidents":
+		context = IncidentReportHandler(w, r)
+	case "enforcertype":
+		context = EnforcerTypeHandler(w, r)
 	default:
 		page = "dashboard"
 		context = DashboardHandler(w, r)

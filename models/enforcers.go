@@ -4,10 +4,12 @@ import "github.com/uadmin/uadmin"
 
 type Enforcers struct {
 	uadmin.Model
-	User     uadmin.User
-	UserID   uint
-	Position string
-	Active   bool
+	User           uadmin.User
+	UserID         uint
+	Position       string
+	EnforcerType   EnforcerType
+	EnforcerTypeID uint
+	Active         bool
 }
 
 func (e *Enforcers) String() string {

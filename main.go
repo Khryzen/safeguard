@@ -25,7 +25,7 @@ func main() {
 	http.HandleFunc("/console/login/", uadmin.Handler(views.ConsoleLoginHandler))
 	http.HandleFunc("/logout/", uadmin.Handler(views.LogoutHandler))
 
-	uadmin.Port = 8080
+	uadmin.Port = 9880
 	uadmin.RootURL = "/uadmin/"
 
 	uadmin.StartServer()

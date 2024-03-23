@@ -24,6 +24,10 @@ func ConsoleHandler(w http.ResponseWriter, r *http.Request) {
 	switch page {
 	case "dashboard":
 		context = DashboardHandler(w, r)
+	case "enforcers":
+		context = EnforcerHandler(w, r)
+	case "disasters":
+		context = DisasterHandler(w, r)
 	default:
 		page = "dashboard"
 		context = DashboardHandler(w, r)

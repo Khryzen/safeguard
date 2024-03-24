@@ -1,21 +1,32 @@
 {{ define "content" }}
 <div class="container-fluid">
+  <div class="container-fluid mb-3">
+    <div class="row col-12 d-flex align-items-center">
+      <div class="col-10 col-md-10 col-sm-12">
+        <div class="row">
+          <div class="mb-0 col-10 col-md-8 col-sm-8 d-flex flex-row">
+            <input type="text" id="searchEnforcer" placeholder="Search..." class="form-control">
+          </div>
+          <div class="col-2 col-md-4 col-sm-4 d-flex flex-row">
+            <button class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 col-md-2 col-sm-12">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary">New Enforcer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container-fluid">
     <div class="card">
       <div class="card-body">
         <!-- TODO: Loop through the enforcers; use cards as details -->
         <div class="row">
-          <div class="col-3">
-            <div class="card">
-              <img src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-3">
+          <div class="col-3 col-md-4 col-sm-12 col-xs-12">
             <div class="card">
               <img
                 src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
@@ -23,12 +34,26 @@
               <div class="card-body">
                 <h5 class="card-title">Name</h5>
                 <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 col-md-4 col-sm-12 col-xs-12">
+            <div class="card">
+              <img
+                src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+                <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's
                   content.</p>
               </div>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-3 col-md-4 col-sm-12 col-xs-12">
             <div class="card">
               <img
                 src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
@@ -36,12 +61,13 @@
               <div class="card-body">
                 <h5 class="card-title">Name</h5>
                 <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's
                   content.</p>
               </div>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-3 col-md-4 col-sm-12 col-xs-12">
             <div class="card">
               <img
                 src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
@@ -49,7 +75,8 @@
               <div class="card-body">
                 <h5 class="card-title">Name</h5>
                 <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's
                   content.</p>
               </div>
             </div>

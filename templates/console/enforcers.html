@@ -26,61 +26,20 @@
       <div class="card-body">
         <!-- TODO: Loop through the enforcers; use cards as details -->
         <div class="row">
+          {{ range .Enforcers }}
           <div class="col-3 col-md-4 col-sm-12 col-xs-12">
             <div class="card">
               <img
                 src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
                 class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title">Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
+                <h5 class="card-title">{{ .User.FirstName }} {{ .User.LastName }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted ">{{ .Position }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted ">{{ .EnforcerType.Designation }}</h6>
+                <p class="card-text">{{ .EnforcerType.Role }}</p>
               </div>
             </div>
-          </div>
-          <div class="col-3 col-md-4 col-sm-12 col-xs-12">
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's
-                  content.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 col-md-4 col-sm-12 col-xs-12">
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's
-                  content.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 col-md-4 col-sm-12 col-xs-12">
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Name</h5>
-                <h6 class="card-subtitle mb-2 text-muted ">Designation</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's
-                  content.</p>
-              </div>
-            </div>
-          </div>
+            {{ end }}
         </div>
       </div>
     </div>

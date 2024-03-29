@@ -1,6 +1,11 @@
 package views
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/mbdeguzman/safeguard/models"
+	"github.com/uadmin/uadmin"
+)
 
 func DashboardHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
@@ -12,6 +17,13 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) map[string]interfa
 func EnforcerHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	enforcers := []models.Enforcers{}
+	uadmin.Filter(&enforcers, "active = ?", true)
+	for i := range enforcers {
+		uadmin.Preload(&enforcers[i])
+	}
+
+	context["Enforcers"] = enforcers
 	context["Title"] = "Enforcers"
 	return context
 }

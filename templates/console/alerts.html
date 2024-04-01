@@ -34,8 +34,10 @@
               <th>Edit</th>
             </tr>
           </thead>
-          <tbody id="alert_level_tbody">
+          <tbody id="alert_tbody">
             {{ range .Alerts }}
+              <td onclick="openAlert('{{ .ID }}')">{{ .Name }}</td>
+              <td>{{ .Level }}</td>
               <td onclick="deleteAlert('{{ .ID }}')"><i class="fa fa-trash" aria-hidden="true"></i></td>
             {{ end }}
           </tbody>
@@ -59,6 +61,7 @@
           <div class="container mb-2">
             <label for="name">Name:</label>
             <input type="text" class="form-control" name="name" id="name">
+            <input type="text" class="form-control" name="redirect_url" value="/console/alerts/" hidden>
             <small style="font-style: italic;">Help: Name can be low, medium, medium-high, etc.</small>
           </div>
           <div class="container mb-2">
@@ -134,13 +137,13 @@
     $('#editAlertModal').modal('show')
     localStorage.setItem("EditDisasterID", id)
     $.ajax({
-      url: "/uadmin/api/d/alert_level/read/?id=" + id,
+      url: "/uadmin/api/d/alertlevel/read/?id=" + id,
       method: "get",
       success: function (resp) {
         console.log(resp["result"][0])
         var data = resp["result"][0]
-        $('#edit_disaster').val(data.Name)
-        $('#edit_description').val(data.Description)
+        $('#edit_name').val(data.Name)
+        $('#edit_level').val(data.Level)
       }
     })
   }
@@ -149,7 +152,7 @@
     var id = localStorage.getItem("EditDisasterID")
     var session = getCookie("session")
     $.ajax({
-      url: "/uadmin/api/d/disasters/edit/" + id + "/?_name=" + $('#edit_disaster').val() + "&_description=" + $('#edit_description').val() + "&x-csrf-token=" + session,
+      url: "/uadmin/api/d/alertlevel/edit/" + id + "/?_name=" + $('#edit_name').val() + "&_level=" + $('#edit_level').val() + "&x-csrf-token=" + session,
       success: function () {
         $('#alert_tbody').empty()
         $('#alert_tbody').load(location.href + ' #alert_tbody>*');
@@ -168,14 +171,14 @@
     let id = localStorage.getItem("DisasterID")
     let session = getCookie("session")
 
-    $.get("/uadmin/api/d/disasters/delete/" + id + "/?x-csrf-token=" + session, function (resp) {
+    $.get("/uadmin/api/d/alertlevel/delete/" + id + "/?x-csrf-token=" + session, function (resp) {
       console.log(resp)
     })
       .done(function () {
         console.log('Request completed successfully.');
         $('#deleteModal').modal('hide')
-        $('#disaster_tbody').empty()
-        $('#disaster_tbody').load(location.href + ' #disaster_tbody>*');
+        $('#alert_tbody').empty()
+        $('#alert_tbody').load(location.href + ' #alert_tbody>*');
       })
       .fail(function (xhr, status, error) {
         console.error('Error:', error);

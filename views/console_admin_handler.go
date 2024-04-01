@@ -34,7 +34,10 @@ func DisasterHandler(w http.ResponseWriter, r *http.Request) map[string]interfac
 
 func AlertLevelHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
+	alerts := []models.AlertLevel{}
+	uadmin.All(&alerts)
 
+	context["Alerts"] = alerts
 	context["Title"] = "Alert Levels"
 	return context
 }

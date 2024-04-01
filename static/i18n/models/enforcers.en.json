@@ -8,6 +8,13 @@
       "err_msg": {},
       "Choices": {}
     },
+    "EnforcerType": {
+      "display_name": "Enforcer Type",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
     "ID": {
       "display_name": "ID",
       "help": "",

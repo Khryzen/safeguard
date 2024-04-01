@@ -31,13 +31,20 @@ func EnforcerHandler(w http.ResponseWriter, r *http.Request) map[string]interfac
 func DisasterHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	disaster := []models.Disasters{}
+	uadmin.All(&disaster)
+
+	context["Disaster"] = disaster
 	context["Title"] = "Disaster"
 	return context
 }
 
 func AlertLevelHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
+	alerts := []models.AlertLevel{}
+	uadmin.All(&alerts)
 
+	context["Alerts"] = alerts
 	context["Title"] = "Alert Levels"
 	return context
 }
@@ -59,6 +66,10 @@ func IncidentReportHandler(w http.ResponseWriter, r *http.Request) map[string]in
 func EnforcerTypeHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	enforcer_type := []models.EnforcerType{}
+	uadmin.All(&enforcer_type)
+
+	context["EnforcerType"] = enforcer_type
 	context["Title"] = "Enforcer Types"
 	return context
 }

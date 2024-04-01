@@ -1,15 +1,22 @@
 package models
 
-import "github.com/uadmin/uadmin"
+import (
+	"strings"
+
+	"github.com/uadmin/uadmin"
+)
 
 type Disasters struct {
 	uadmin.Model
-	Name         string
-	Description  string
-	AlertLevel   AlertLevel
-	AlertLevelID uint
+	Name        string
+	Description string
 }
 
 func (d *Disasters) String() string {
 	return d.Name
+}
+
+func (d *Disasters) Save() {
+	d.Name = strings.ToUpper(d.Name)
+	uadmin.Save(d)
 }

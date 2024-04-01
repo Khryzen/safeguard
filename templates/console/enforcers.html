@@ -34,7 +34,7 @@
                 <h5 class="card-title">{{ .User.FirstName }} {{ .User.LastName }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ .Position }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ .EnforcerType.Designation }}</h6>
-                <p class="card-text">{{ .EnforcerType.Role }}</p>
+                <p class="card-text" style="white-space: nowrap;text-overflow: ellipsis;">{{ .EnforcerType.Role }}</p>
               </div>
             </div>
           </div>

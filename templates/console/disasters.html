@@ -15,7 +15,8 @@
       <div class="col-2 col-md-2 col-sm-12">
         <div class="row">
           <div class="col-12">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newDisasterModal">New Disaster</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newDisasterModal">New
+              Disaster</button>
           </div>
         </div>
       </div>
@@ -30,9 +31,17 @@
             <tr>
               <th>Disaster</th>
               <th>Description</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody id="disaster_tbody">
+            {{ range .Disaster }}
+            <tr>
+              <td onclick="openDisaster('{{ .ID }}')">{{ .Name }}</td>
+              <td>{{ .Description }}</td>
+              <td onclick="deleteDisaster('{{ .ID }}')"><i class="fa fa-trash" aria-hidden="true"></i></td>
+            </tr>
+            {{ end }}
           </tbody>
         </table>
       </div>
@@ -42,8 +51,7 @@
 
 <!-- * MODALS * -->
 <!-- New Enforcer Type -->
-<div class="modal fade" id="newDisasterModal" tabindex="-1" aria-labelledby="newDisasterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="newDisasterModal" tabindex="-1" aria-labelledby="newDisasterTitle" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -55,6 +63,7 @@
           <div class="container mb-2">
             <label for="disaster">Disaster:</label>
             <input type="text" class="form-control" name="disaster" id="disaster">
+            <input type="text" class="form-control" name="redirect_url" value="/console/disasters/" hidden>
           </div>
           <div class="container mb-2">
             <label for="description">Description:</label>
@@ -70,5 +79,113 @@
     </div>
   </div>
 </div>
+
+<!-- Edit Disaster -->
+<div class="modal fade" id="editDisasterModal" tabindex="-1" aria-labelledby="editDisasterTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editDisasterTitle">Edit Disaster</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="container mb-2">
+            <label for="disaster">Disaster:</label>
+            <input type="text" class="form-control" id="edit_disaster">
+          </div>
+          <div class="container mb-2">
+            <label for="description">Description:</label>
+            <textarea id="edit_description" cols="30" rows="10" class="form-control"></textarea>
+          </div>
+          <hr>
+          <div class="container">
+            <button type="submit" class="btn btn-primary" id="editDisasterSave">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Delete enforcer type modal confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Disaster</h5>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this disaster?
+      </div>
+      <div class="modal-footer">
+        <button id="confirmed" type="button" class="btn btn-primary">Yes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+{{ end }}
+
+{{ define "script" }}
+<script src="/static/js/common.js"></script>
+<script>
+  function openDisaster(id) {
+    $('#editDisasterModal').modal('show')
+    localStorage.setItem("EditDisasterID", id)
+    $.ajax({
+      url: "/uadmin/api/d/disasters/read/?id=" + id,
+      method:"get",
+      success: function(resp){
+        console.log(resp["result"][0])
+        var data = resp["result"][0]
+        $('#edit_disaster').val(data.Name)
+        $('#edit_description').val(data.Description)
+      }
+    })
+  }
+
+  $('#editDisasterSave').on('click', function(){
+    var id = localStorage.getItem("EditDisasterID")
+    var session = getCookie("session")
+    $.ajax({
+      url: "/uadmin/api/d/disasters/edit/"+id+"/?_name="+ $('#edit_disaster').val() +"&_description="+ $('#edit_description').val() +"&x-csrf-token="+session,
+      success:function(){
+        $('#disaster_tbody').empty()
+        $('#disaster_tbody').load(location.href + ' #disaster_tbody>*');
+        $('#editDisasterModal').modal('hide')
+      }
+    })
+  })
+
+  function deleteDisaster(id) {
+    localStorage.setItem("DisasterID", id)
+    console.log(id)
+    $('#deleteModal').modal('show')
+  }
+
+  $('#confirmed').on('click', function () {
+    let id = localStorage.getItem("DisasterID")
+    let session = getCookie("session")
+
+    $.get("/uadmin/api/d/disasters/delete/" + id + "/?x-csrf-token=" + session, function (resp) {
+      console.log(resp)
+    })
+      .done(function () {
+        console.log('Request completed successfully.');
+        $('#deleteModal').modal('hide')
+        $('#disaster_tbody').empty()
+        $('#disaster_tbody').load(location.href + ' #disaster_tbody>*');
+      })
+      .fail(function (xhr, status, error) {
+        console.error('Error:', error);
+      });
+  })
+
+</script>
 {{ end }}

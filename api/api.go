@@ -13,6 +13,8 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 	switch path {
 	case "new_enforcer_type":
 		NewEnforcer(w, r)
+	case "new_disaster":
+		NewDisaster(w, r)
 	default:
 		InvalidAPI(w, r)
 	}

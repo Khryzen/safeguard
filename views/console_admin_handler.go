@@ -24,6 +24,10 @@ func EnforcerHandler(w http.ResponseWriter, r *http.Request) map[string]interfac
 func DisasterHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	disaster := []models.Disasters{}
+	uadmin.All(&disaster)
+
+	context["Disaster"] = disaster
 	context["Title"] = "Disaster"
 	return context
 }

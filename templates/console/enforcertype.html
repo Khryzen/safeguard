@@ -32,9 +32,22 @@
               <th>Designation</th>
               <th>Role</th>
               <th>Active</th>
+              <th>Delete</th>
             </tr>
             </thead>
             <tbody id="enforcerType_tbody">
+              {{ range .EnforcerType }}
+              <tr>
+                <td onclick="openEnforcerType('{{ .ID }}')">{{ .Designation }}</td>
+                <td>{{ .Role }}</td>
+                {{ if .Active }}
+                <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                {{ else }}
+                <td><i class="fa fa-circle-xmark" aria-hidden="true"></i></td>
+                {{ end }}
+                <td onclick="deleteEnforcerType('{{ .ID }}')"><i class="fa fa-trash" aria-hidden="true"></i></td>
+              </tr>
+              {{ end }}
             </tbody>
         </table>
       </div>
@@ -52,10 +65,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/api/new_enforcertype/" method="post">
+        <form action="/api/new_enforcer_type/" method="post">
           <div class="container mb-2">
             <label for="designation">Designation</label>
             <input type="text" class="form-control" name="designation" id="designation">
+            <input type="text" class="form-control" name="redirect_url" hidden value="/console/enforcertype/">
           </div>
           <div class="container mb-2">
             <label for="role">Role:</label>
@@ -64,8 +78,8 @@
           <div class="container mb-2">
             <label for="active">Active:</label>
             <select name="active" id="active" class="form-control">
-              <option value="yes" selected>Yes</option>
-              <option value="no">No</option>
+              <option value="true" selected>Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
           <hr>
@@ -78,5 +92,102 @@
     </div>
   </div>
 </div>
+
+<!-- Edit enforcer type modal -->
+<!-- New Enforcer Type -->
+<div class="modal fade" id="editEnforcerTypeModal" tabindex="-1" aria-labelledby="newEnforcerTypeTitle"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newEnforcerTypeTitle">Edit Enforcer Type</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="container mb-2">
+            <label for="designation">Designation</label>
+            <input type="text" class="form-control" id="designation">
+          </div>
+          <div class="container mb-2">
+            <label for="role">Role:</label>
+            <textarea id="role" cols="30" rows="10" class="form-control"></textarea>
+          </div>
+          <div class="container mb-2">
+            <label for="active">Active:</label>
+            <select id="active" class="form-control">
+              <option value="true" selected>Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          <hr>
+          <div class="container">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Delete enforcer type modal confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Enforcer Type</h5>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the enforcer type?
+      </div>
+      <div class="modal-footer">
+        <button id="confirmed" type="button" class="btn btn-primary">Yes</button>
+        <button type="button" class="btn btn-secondary" onclick="closeModal('deleteModal')">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{{ end }}
+{{ define "script" }}
+<script src="/static/js/common.js"></script>
+<script>
+  function openEnforcerType(id){
+    $('#editEnforcerTypeModal').modal('show')
+  }
+
+  function deleteEnforcerType(id){
+    localStorage.setItem("ID", id)
+    console.log(id)
+    openModal("deleteModal")
+  }
+
+  function closeModal(id){
+    $('#'+id).modal('hide');
+  }
+
+
+  function openModal(id) {
+    $('#' + id).modal('show');
+  }
+
+  $('#confirmed').on('click', function(){
+    let id = localStorage.getItem("ID")
+    let session = getCookie("session")
+
+    $.get("/uadmin/api/d/enforcertype/delete/"+id+"/?x-csrf-token="+session, function(resp){
+      console.log(resp)
+    })
+    .done(function () {
+      console.log('Request completed successfully.');
+      closeModal("deleteModal")
+      $('#enforcerType_tbody').empty()
+      $('#enforcerType_tbody').load(location.href + ' #enforcerType_tbody>*');
+    })
+    .fail(function (xhr, status, error) {
+      console.error('Error:', error);
+    });
+  })
+</script>
 {{ end }}

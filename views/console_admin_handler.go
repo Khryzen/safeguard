@@ -1,6 +1,11 @@
 package views
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/mbdeguzman/safeguard/models"
+	"github.com/uadmin/uadmin"
+)
 
 func DashboardHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
@@ -47,6 +52,10 @@ func IncidentReportHandler(w http.ResponseWriter, r *http.Request) map[string]in
 func EnforcerTypeHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	enforcer_type := []models.EnforcerType{}
+	uadmin.All(&enforcer_type)
+
+	context["EnforcerType"] = enforcer_type
 	context["Title"] = "Enforcer Types"
 	return context
 }

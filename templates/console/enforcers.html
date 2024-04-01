@@ -26,12 +26,10 @@
       <div class="card-body">
         <!-- TODO: Loop through the enforcers; use cards as details -->
         <div class="row">
-          {{ range .Enforcers }}
+        {{ range .Enforcers }}
           <div class="col-3 col-md-4 col-sm-12 col-xs-12">
-            <div class="card">
-              <img
-                src="https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-                class="card-img-top" alt="...">
+            <div class="card" style="max-width: 280px; min-width: 280px;">
+              <img src="{{ .User.Photo }}" class="card-img-top" style="max-height: 280px;max-width: 280px; min-width: 280px; min-height: 280px;">
               <div class="card-body">
                 <h5 class="card-title">{{ .User.FirstName }} {{ .User.LastName }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ .Position }}</h6>
@@ -39,8 +37,8 @@
                 <p class="card-text">{{ .EnforcerType.Role }}</p>
               </div>
             </div>
-            {{ end }}
-        </div>
+          </div>
+        {{ end }}
       </div>
     </div>
   </div>
@@ -57,10 +55,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/api/new_enforcer/" method="post">
+        <form action="/api/new_enforcer/" method="post" enctype="multipart/form-data">
           <div class="container mb-2">
             <label for="firstName">First Name:</label>
             <input type="text" class="form-control" name="firstName" id="fName">
+            <input type="text" class="form-control" name="redirect_url" id="redirect_url" value="/console/enforcers/" hidden>
           </div>
           <div class="container mb-2">
             <label for="lastName">Last Name:</label>
@@ -70,15 +69,21 @@
             <label for="emailAddress">Email Address:</label>
             <input type="email" class="form-control" name="emailAddress" id="emailAddress">
           </div>
-
           <div class="container mb-2">
             <label for="position">Position:</label>
             <input type="text" class="form-control" name="position" id="position">
           </div>
           <div class="container mb-2">
+            <label for="photo">Image:</label>
+            <input type="file" class="form-control" name="photo" id="photo" accept="image/*">
+          </div>
+          <div class="container mb-2">
             <label for="enforcerType">Enforcer Type: </label>
             <select name="enforcerType" id="enforcerType" class="form-control">
               <option value="-" selected hidden>Choose ...</option>
+              {{ range .EnforcerTypes }}
+              <option value="{{ .ID }}">{{ .Designation }}</option>
+              {{ end }}
               <!-- TODO: Add the dynamic values here -->
             </select>
           </div>

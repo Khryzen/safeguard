@@ -23,7 +23,11 @@ func EnforcerHandler(w http.ResponseWriter, r *http.Request) map[string]interfac
 		uadmin.Preload(&enforcers[i])
 	}
 
+	enforcer_types := []models.EnforcerType{}
+	uadmin.Filter(&enforcer_types, "active = ?", true)
+
 	context["Enforcers"] = enforcers
+	context["EnforcerTypes"] = enforcer_types
 	context["Title"] = "Enforcers"
 	return context
 }

@@ -1,5 +1,82 @@
 {{ define "content" }}
-Enforcer Type
+<div class="container-fluid">
+  <div class="container-fluid mb-3">
+    <div class="row col-12 d-flex align-items-center">
+      <div class="col-10 col-md-10 col-sm-12">
+        <div class="row">
+          <div class="mb-0 col-10 col-md-8 col-sm-8 d-flex flex-row">
+            <input type="text" id="searchEnforcerType" placeholder="Search..." class="form-control">
+          </div>
+          <div class="col-2 col-md-4 col-sm-4 d-flex flex-row">
+            <button class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 col-md-2 col-sm-12">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newEnforcerTypeModal">New
+              Enforcer Type</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <!-- TODO: Loop through the enforcers; use cards as details -->
+        <table class="table table-striped table-responsive">
+          <thead class="thead-default">
+            <tr>
+              <th>Designation</th>
+              <th>Role</th>
+              <th>Active</th>
+            </tr>
+            </thead>
+            <tbody id="enforcerType_tbody">
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- TODO: Add the level or ranking here and their responsibilities -->
+<!-- * MODALS * -->
+<!-- New Enforcer Type -->
+<div class="modal fade" id="newEnforcerTypeModal" tabindex="-1" aria-labelledby="newEnforcerTypeTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newEnforcerTypeTitle">New Enforcer Type</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/api/new_enforcertype/" method="post">
+          <div class="container mb-2">
+            <label for="designation">Designation</label>
+            <input type="text" class="form-control" name="designation" id="designation">
+          </div>
+          <div class="container mb-2">
+            <label for="role">Role:</label>
+            <textarea name="role" id="role" cols="30" rows="10" class="form-control"></textarea>
+          </div>
+          <div class="container mb-2">
+            <label for="active">Active:</label>
+            <select name="active" id="active" class="form-control">
+              <option value="yes" selected>Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <hr>
+          <div class="container">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 {{ end }}

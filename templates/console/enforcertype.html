@@ -94,7 +94,6 @@
 </div>
 
 <!-- Edit enforcer type modal -->
-<!-- New Enforcer Type -->
 <div class="modal fade" id="editEnforcerTypeModal" tabindex="-1" aria-labelledby="newEnforcerTypeTitle"
   aria-hidden="true">
   <div class="modal-dialog">
@@ -107,22 +106,22 @@
         <div>
           <div class="container mb-2">
             <label for="designation">Designation</label>
-            <input type="text" class="form-control" id="designation">
+            <input type="text" class="form-control" id="edit_designation">
           </div>
           <div class="container mb-2">
-            <label for="role">Role:</label>
-            <textarea id="role" cols="30" rows="10" class="form-control"></textarea>
+            <label for="edit_role">Role:</label>
+            <textarea id="edit_role" cols="30" rows="10" class="form-control"></textarea>
           </div>
           <div class="container mb-2">
-            <label for="active">Active:</label>
-            <select id="active" class="form-control">
+            <label for="edit_active">Active:</label>
+            <select id="edit_active" class="form-control">
               <option value="true" selected>Yes</option>
               <option value="false">No</option>
             </select>
           </div>
           <hr>
           <div class="container">
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary" id="editEnforcerTypeSave">Save changes</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
@@ -155,7 +154,34 @@
 <script>
   function openEnforcerType(id){
     $('#editEnforcerTypeModal').modal('show')
+     localStorage.setItem("EditEnforcerTypeID", id)
+    $.ajax({
+      url: "/uadmin/api/d/enforcertype/read/?id=" + id,
+      method: "get",
+      success: function (resp) {
+        console.log(resp["result"][0])
+        var data = resp["result"][0]
+        $('#edit_designation').val(data.Designation)
+        $('#edit_role').val(data.Role)
+        $('#edit_active').val((data.Active).toString())
+        console.log(data.Active)
+        console.log($('#edit_active').val())
+      }
+    })
   }
+
+    $('#editEnforcerTypeSave').on('click', function () {
+        var id = localStorage.getItem("EditEnforcerTypeID")
+        var session = getCookie("session")
+        $.ajax({
+          url: "/uadmin/api/d/enforcertype/edit/" + id + "/?_designation=" + $('#edit_designation').val() + "&_role=" + $('#edit_role').val() + "&_active=" + $('#edit_active').val() +"&x-csrf-token=" + session,
+          success: function () {
+            $('#enforcerType_tbody').empty()
+            $('#enforcerType_tbody').load(location.href + ' #enforcerType_tbody>*');
+            $('#editEnforcerTypeModal').modal('hide')
+          }
+        })
+      })
 
   function deleteEnforcerType(id){
     localStorage.setItem("ID", id)

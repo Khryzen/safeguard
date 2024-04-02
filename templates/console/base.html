@@ -143,8 +143,10 @@
           </ul>
 
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-
-            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end gap-2">
+              <li id="is_day" class="nav-item d-block"></li>
+              <li id="temperature" class="nav-item d-block"></li>
+              <li id="weather" class="nav-item d-block"></li>
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
@@ -182,6 +184,46 @@
   <script src="/static/libs/apexcharts/dist/apexcharts.min.js"></script>
   <script src="/static/libs/simplebar/dist/simplebar.js"></script>
   <script src="/static/js/dashboard.js"></script>
+  <script>
+    var weather = {
+      0 : "Clear Sky",
+      1: "Mainly Clear",
+      2: "Partly Cloudy",
+      3: "Overcast",
+      45: "Fog",
+      48: "Depositing Rime Fog",
+      51: "Light Drizzle",
+      53: "Moderate Drizzle",
+      55: "Dense Drizzle",
+      56: "Light Freezing Drizzle",
+      57: "Dense Freezing Drizzle",
+      61: "Light Rain",
+      63: "Moderate Rain",
+      65: "Heavy Rain",
+      66: "Light Freezing Rain",
+      67: "Heavy Freezing Rain",
+      80: "Slight Rain Showers",
+      81: "Moderate Rain Showers",
+      82: "Violent Rain Showers",
+      95: "Thunderstorm",
+    }
+
+    $.ajax({
+      url: "https://api.open-meteo.com/v1/forecast?latitude=12.7464&longitude=121.4874&current=temperature_2m,is_day,weather_code&timezone=Asia%2FSingapore&models=best_match",
+      success: function(resp){
+        console.log(resp)
+        $('#temperature').html(resp["current"]["temperature_2m"]+"&deg;C")
+        if (resp["current"]["is_day"] == 0){
+          $('#is_day').append('<i class="fa-solid fa-moon"></i>')
+        }
+        if (resp["current"]["is_day"] == 1){
+          $('#is_day').append('<i class="fa-solid fa-sun"></i>')
+        }
+        $('#weather').html(weather[resp["current"]["weather_code"]])
+      }
+
+    })
+  </script>
   {{ template "script" . }}
 
   {{ define "style" }}{{ end }}

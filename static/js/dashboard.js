@@ -6,85 +6,70 @@ $(function () {
   // =====================================
   var chart = {
     series: [
-      { name: "Earnings this month:", data: [355, 390, 300, 350, 390, 180, 355, 390] },
-      { name: "Expense this month:", data: [280, 250, 325, 215, 250, 310, 280, 250] },
+      { 
+        data:[
+          {
+            x:new Date('2024-01-01').getTime(),
+            y:12,
+          },
+          {
+            x:new Date('2024-02-01').getTime(),
+            y:14,
+          },
+          {
+            x:new Date('2024-03-01').getTime(),
+            y:2,
+          },
+          {
+            x:new Date('2024-04-01').getTime(),
+            y:12,
+          },
+          {
+            x:new Date('2024-05-01').getTime(),
+            y:5,
+          },
+          {
+            x:new Date('2024-06-01').getTime(),
+            y:7,
+          },
+        ]
+      },
     ],
-
-    chart: {
-      type: "bar",
-      height: 345,
-      offsetX: -15,
-      toolbar: { show: true },
-      foreColor: "#adb0bb",
-      fontFamily: 'inherit',
-      sparkline: { enabled: false },
-    },
-
-
-    colors: ["#5D87FF", "#49BEFF"],
-
-
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "35%",
-        borderRadius: [6],
-        borderRadiusApplication: 'end',
-        borderRadiusWhenStacked: 'all'
-      },
-    },
-    markers: { size: 0 },
-
     dataLabels: {
-      enabled: false,
+      position: 'top'
     },
-
-
-    legend: {
-      show: false,
+    xaxis:{
+      type: 'datetime'
     },
-
-
-    grid: {
-      borderColor: "rgba(0,0,0,0.1)",
-      strokeDashArray: 3,
-      xaxis: {
-        lines: {
-          show: false,
-        },
-      },
-    },
-
-    xaxis: {
-      type: "category",
-      categories: ["16/08", "17/08", "18/08", "19/08", "20/08", "21/08", "22/08", "23/08"],
-      labels: {
-        style: { cssClass: "grey--text lighten-2--text fill-color" },
-      },
-    },
-
-
-    yaxis: {
-      show: true,
-      min: 0,
-      max: 400,
-      tickAmount: 4,
-      labels: {
-        style: {
-          cssClass: "grey--text lighten-2--text fill-color",
-        },
-      },
+    chart: {
+      type: "area",
     },
     stroke: {
       show: true,
       width: 3,
       lineCap: "butt",
-      colors: ["transparent"],
+      curve: 'smooth',
     },
-
-
-    tooltip: { theme: "light" },
-
+    colors: ["#5D87FF", "#49BEFF"],
+    markers: { size: 0 },
+    dataLabels: {
+      enabled: false,
+    },
+    legend: {
+      show: false,
+    },
+    grid: {
+      borderColor: "rgba(0,0,0,0.1)",
+      strokeDashArray: 3,
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+    },
+    tooltip: { 
+      theme: "dark" 
+    },
     responsive: [
       {
         breakpoint: 600,

@@ -38,7 +38,7 @@
             {{ range .Disaster }}
             <tr>
               <td onclick="openDisaster('{{ .ID }}')">{{ .Name }}</td>
-              <td style="white-space: nowrap;text-overflow: ellipsis;">{{ .Description }}</td>
+              <td style="white-space:no-wrap; overflow-x:hidden;text-overflow: ellipsis;">{{ .Description }}</td>
               <td onclick="deleteDisaster('{{ .ID }}')"><i class="fa fa-trash" aria-hidden="true"></i></td>
             </tr>
             {{ end }}

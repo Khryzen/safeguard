@@ -34,9 +34,18 @@
               <th>Alert Level</th>
               <th>Description</th>
               <th>Active</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody id="protocol_tbody">
+            {{ range .Protocols }}
+              <td onclick="openDisaster('{{ .ID }}')">{{ .Code }}</td>
+              <td>{{ .Disasters.Name }}</td>
+              <td>{{  .AlertLevel.Name}}</td>
+              <td style="white-space: nowrap;overflow-x:hidden;text-overflow: ellipsis;">{{ .Description }}</td>
+              <td>{{ .Active }}</td>
+              <td onclick="deleteDisaster('{{ .ID }}')"><i class="fa fa-trash" aria-hidden="true"></i></td>
+            {{ end }}
           </tbody>
         </table>
       </div>
@@ -67,12 +76,18 @@
             <label for="disaster">Disaster:</label>
             <select name="disaster" id="disaster" class="form-control">
               <option value="-" selected hidden>Choose...</option>
+                {{ range .Disasters }}
+                <option value="{{ .ID }}">{{ .Name }}</option>
+                {{ end }}
             </select>
           </div>
           <div class="container mb-2">
             <label for="alert_level">Alert Level:</label>
             <select name="alert_level" id="alert_level" class="form-control">
               <option value="-" selected hidden>Choose...</option>
+              {{ range .AlertLevels }}
+              <option value="{{ .ID }}">{{ .Name }}</option>
+              {{ end }}
             </select>
           </div>
           <div class="container mb-2">

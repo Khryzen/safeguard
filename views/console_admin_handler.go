@@ -56,6 +56,20 @@ func AlertLevelHandler(w http.ResponseWriter, r *http.Request) map[string]interf
 func ProtocolsHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	disasters := []models.Disasters{}
+	uadmin.All(&disasters)
+	alerts := []models.AlertLevel{}
+	uadmin.All(&alerts)
+	protocols := []models.Protocols{}
+	uadmin.All(&protocols)
+
+	for i := range protocols {
+		uadmin.Preload(protocols[i])
+	}
+
+	context["Disasters"] = disasters
+	context["AlertLevels"] = alerts
+	context["Protocols"] = protocols
 	context["Title"] = "Protocols"
 	return context
 }

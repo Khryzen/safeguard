@@ -39,7 +39,7 @@
               {{ range .EnforcerType }}
               <tr>
                 <td onclick="openEnforcerType('{{ .ID }}')">{{ .Designation }}</td>
-                <td style="white-space: nowrap;text-overflow: ellipsis;">{{ .Role }}</td>
+                <td style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 120px;">{{ .Role }}</td>
                 {{ if .Active }}
                 <td><i class="fa fa-check" aria-hidden="true"></i></td>
                 {{ else }}

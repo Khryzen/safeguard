@@ -19,6 +19,8 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		NewDisaster(w, r)
 	case "new_alert_level":
 		NewAlertLevel(w, r)
+	case "new_protocol":
+		NewProtocol(w, r)
 	default:
 		InvalidAPI(w, r)
 	}

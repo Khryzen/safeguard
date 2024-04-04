@@ -64,7 +64,7 @@ func ProtocolsHandler(w http.ResponseWriter, r *http.Request) map[string]interfa
 	uadmin.All(&protocols)
 
 	for i := range protocols {
-		uadmin.Preload(protocols[i])
+		uadmin.Preload(&protocols[i])
 	}
 
 	context["Disasters"] = disasters

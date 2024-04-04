@@ -36,9 +36,11 @@
           </thead>
           <tbody id="alert_tbody">
             {{ range .Alerts }}
+            <tr>
               <td onclick="openAlert('{{ .ID }}')">{{ .Name }}</td>
               <td>{{ .Level }}</td>
               <td onclick="deleteAlert('{{ .ID }}')"><i class="fa fa-trash" aria-hidden="true"></i></td>
+            </tr>
             {{ end }}
           </tbody>
         </table>

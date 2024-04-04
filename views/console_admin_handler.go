@@ -77,6 +77,29 @@ func ProtocolsHandler(w http.ResponseWriter, r *http.Request) map[string]interfa
 func IncidentReportHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	incidents := []models.IncidentReport{}
+	uadmin.All(&incidents)
+	for i := range incidents {
+		uadmin.Preload(&incidents[i])
+		uadmin.Preload(&incidents[i].Captain)
+	}
+
+	disaster := []models.Disasters{}
+	uadmin.All(&disaster)
+
+	alert := []models.AlertLevel{}
+	uadmin.All(&alert)
+
+	enforcer := []models.Enforcers{}
+	uadmin.Filter(&enforcer, "active = ?", true)
+	for i := range enforcer {
+		uadmin.Preload(&enforcer[i])
+	}
+
+	context["Alerts"] = alert
+	context["Disaster"] = disaster
+	context["Enforcers"] = enforcer
+	context["Incidents"] = incidents
 	context["Title"] = "Incident Reports"
 	return context
 }

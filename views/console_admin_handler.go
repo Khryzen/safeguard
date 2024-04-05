@@ -118,6 +118,24 @@ func EnforcerTypeHandler(w http.ResponseWriter, r *http.Request) map[string]inte
 func SettingsHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	type Enforcer struct {
+		Enforcer  models.Enforcers
+		LastLogin string
+	}
+
+	e := []Enforcer{}
+	enforcers := []models.Enforcers{}
+	uadmin.Filter(&enforcers, "active = ?", true)
+	for i := range enforcers {
+		uadmin.Preload(&enforcers[i])
+		e = append(e, Enforcer{
+			Enforcer:  enforcers[i],
+			LastLogin: enforcers[i].User.LastLogin.Format("January 2, 2006 3:04 PM"),
+		})
+
+	}
+
+	context["Enforcers"] = e
 	context["Title"] = "Settings"
 	return context
 }

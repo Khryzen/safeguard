@@ -23,6 +23,9 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		NewProtocol(w, r)
 	case "new_incident_report":
 		NewIncidentReport(w, r)
+		NewProtocol(w, r)
+	case "sms_user":
+		NewSMSUser(w, r)
 	default:
 		InvalidAPI(w, r)
 	}

@@ -17,6 +17,14 @@ func main() {
 		models.Enforcers{},
 		models.IncidentReport{},
 		models.Protocols{},
+
+		// Inventory Models
+		models.Item{},
+		models.Transaction{},
+		models.InventoryLine{},
+
+		// SMS Model
+		models.SMSSubscriber{},
 	)
 
 	http.HandleFunc("/login/", uadmin.Handler(views.LoginHandler))

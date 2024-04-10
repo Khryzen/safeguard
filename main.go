@@ -28,6 +28,7 @@ func main() {
 
 	http.HandleFunc("/console/", uadmin.Handler(views.ConsoleHandler))
 	http.HandleFunc("/console/login/", uadmin.Handler(views.ConsoleLoginHandler))
+	http.HandleFunc("/register/", uadmin.Handler(views.SMSRegister))
 	http.HandleFunc("/logout/", uadmin.Handler(views.LogoutHandler))
 
 	uadmin.Port = 9880

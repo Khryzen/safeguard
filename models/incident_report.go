@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/uadmin/uadmin"
@@ -27,4 +28,23 @@ func (i *IncidentReport) Save() {
 	i.IncidentDateStr = formattedTime
 
 	uadmin.Save(i)
+
+	apiKey := uadmin.GetSetting("SMSAPI").(string)
+	sms_users := []SMSSubscriber{}
+	uadmin.All(&sms_users)
+
+	for j := range sms_users {
+		sms := SMSRequest{
+			From:    "Bongabong MDRRMO",
+			To:      sms_users[j].MobileNumber,
+			Message: i.IncidentDateStr + "\n" + i.Disasters.Name + "\n" + i.AlertLevel.Name + " at " + i.Location + "\n" + i.Remarks,
+		}
+
+		err := sendSMS(apiKey, sms)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+		fmt.Println("SMS sent successfully!")
+	}
 }

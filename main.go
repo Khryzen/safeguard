@@ -27,6 +27,22 @@ func main() {
 		models.SMSSubscriber{},
 	)
 
+	category := uadmin.SettingCategory{}
+
+	if uadmin.Count(&category, "name = ?", "SMS") == 0 {
+		settings := uadmin.Setting{}
+		category.Name = "SMS"
+		uadmin.Save(&category)
+
+		uadmin.Get(&category, "name = ?", "SMS")
+		settings.Category = category
+		settings.DataType = settings.DataType.String()
+		settings.Name = "API Key"
+		settings.Value = "71174e4de05abb5b79ac73a25d76fe9b"
+		settings.Code = "SMSAPI"
+		uadmin.Save(&settings)
+	}
+
 	http.HandleFunc("/login/", uadmin.Handler(views.LoginHandler))
 	http.HandleFunc("/mobile/", uadmin.Handler(views.MobileHandler))
 

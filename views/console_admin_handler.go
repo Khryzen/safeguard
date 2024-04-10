@@ -128,11 +128,18 @@ func SettingsHandler(w http.ResponseWriter, r *http.Request) map[string]interfac
 	uadmin.Filter(&enforcers, "active = ?", true)
 	for i := range enforcers {
 		uadmin.Preload(&enforcers[i])
-		e = append(e, Enforcer{
-			Enforcer:  enforcers[i],
-			LastLogin: enforcers[i].User.LastLogin.Format("January 2, 2006 3:04 PM"),
-		})
-
+		uadmin.Trail(uadmin.DEBUG, "%#v", enforcers[i].User.LastLogin)
+		if enforcers[i].User.LastLogin == nil {
+			e = append(e, Enforcer{
+				Enforcer:  enforcers[i],
+				LastLogin: "No login records yet.",
+			})
+		} else {
+			e = append(e, Enforcer{
+				Enforcer:  enforcers[i],
+				LastLogin: enforcers[i].User.LastLogin.Format("January 2, 2006 3:04 PM"),
+			})
+		}
 	}
 
 	context["Enforcers"] = e

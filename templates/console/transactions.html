@@ -1,0 +1,131 @@
+{{ define "content" }}
+<div class="container-fluid">
+  <div class="container-fluid mb-3">
+    <div class="row col-12 d-flex align-items-center">
+      <div class="col-10 col-md-10 col-sm-12">
+        <div class="row">
+          <div class="mb-0 col-10 col-md-8 col-sm-8 d-flex flex-row">
+            <input type="text" id="searchEnforcerType" placeholder="Search..." class="form-control">
+          </div>
+          <div class="col-2 col-md-4 col-sm-4 d-flex flex-row">
+            <button class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 col-md-2 col-sm-12">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newItemModal">
+              New Item
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <!-- TODO: Loop through the enforcers; use cards as details -->
+        <table class="table table-striped table-responsive">
+          <thead class="thead-default">
+            <tr>
+              <th>Code</th>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Transaction Type</th>
+              <th>Enforcer</th>
+            </tr>
+          </thead>
+          <tbody id="items_tbody">
+            {{ range .Transactions }}
+            <tr>
+              <td>{{ .Code }}</td>
+              <td>{{ .Item.Name }}</td>
+              <td>{{ .Quantity }}</td>
+              {{ if eq .TransactionType 1 }}
+              <td>Inventory In</td>
+              {{ end }}
+              {{ if eq .TransactionType 2 }}
+              <td>Inventory Out</td>
+              {{ end }}
+              <td>{{ .Enforcer.User.FirstName }} {{ .Enforcer.User.LastName }}</td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- * MODALS * -->
+<!-- New Items -->
+<div class="modal fade" id="newItemModal" tabindex="-1" aria-labelledby="newItemTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newItemTitle">New Transaction</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/api/new_transaction/" method="post">
+          <div class="container mb-2">
+            <label for="item">Item:</label>
+            <input type="text" class="form-control" name="redirect_url" value="/console/transactions/" hidden>
+            <select name="item" id="item" class="form-control">
+              {{ range .Items }}
+              <option value="{{ .ID }}">{{ .Name }}</option>
+              {{ end }}
+            </select>
+          </div>
+          <div class="container mb-2">
+            <label for="quantity">Quantity:</label>
+            <input type="number" class="form-control" name="quantity" id="quantity">
+          </div>
+          <div class="container mb-2">
+            <label for="type">Transaction Type:</label>
+            <select name="type" id="type" class="form-control">
+              <option value="1">Inventory In</option>
+              <option value="2">Inventory Out</option>
+            </select>
+          </div>
+          <div class="container mb-2">
+            <label for="enforcer">Enforcer:</label>
+            <select name="enforcer" id="enforcer" class="form-control" readonly>
+              <option value="{{ .Enforcer.ID }}" selected>{{ .Enforcer.User.FirstName }} {{ .Enforcer.User.LastName }}</option>
+            </select>
+          </div>
+          <hr>
+          <div class="container">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+{{ end }}
+
+{{ define "script" }}
+<script src="/static/js/common.js"></script>
+<script>
+  function openItem(id) {
+    $('#editItemModal').modal('show')
+    $.ajax({
+      url: "/uadmin/api/d/item/read/?id=" + id,
+      method: "get",
+      success: function (resp) {
+        console.log(resp["result"][0])
+        var data = resp["result"][0]
+        $('#edit_name').val(data.Name)
+        $('#edit_photo').val(data.Level)
+        $('#edit_id').val(data.ID)
+      }
+    })
+  }
+</script>
+{{ end }}

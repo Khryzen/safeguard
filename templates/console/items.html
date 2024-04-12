@@ -1,0 +1,135 @@
+{{ define "content" }}
+<div class="container-fluid">
+  <div class="container-fluid mb-3">
+    <div class="row col-12 d-flex align-items-center">
+      <div class="col-10 col-md-10 col-sm-12">
+        <div class="row">
+          <div class="mb-0 col-10 col-md-8 col-sm-8 d-flex flex-row">
+            <input type="text" id="searchEnforcerType" placeholder="Search..." class="form-control">
+          </div>
+          <div class="col-2 col-md-4 col-sm-4 d-flex flex-row">
+            <button class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Search</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 col-md-2 col-sm-12">
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newItemModal">
+              New Item
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <!-- TODO: Loop through the enforcers; use cards as details -->
+        <table class="table table-striped table-responsive">
+          <thead class="thead-default">
+            <tr>
+              <th>Item</th>
+              <th>Image</th>
+              <th>Remaining</th>
+            </tr>
+          </thead>
+          <tbody id="items_tbody">
+            {{ range .Items }}
+            <tr>
+              <td onclick="openItem('{{ .Item.ID }}')">{{ .Item.Name }}</td>
+              <td><img src="{{ .Item.Image }}" alt="{{ .Item.Name }}" style="max-height: 150px;"></td>
+              <td>{{ .Remaining }}</td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- * MODALS * -->
+<!-- New Items -->
+<div class="modal fade" id="newItemModal" tabindex="-1" aria-labelledby="newItemTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newItemTitle">New Item</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/api/new_item/" method="post" enctype="multipart/form-data">
+          <div class="container mb-2">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" name="name" id="name">
+            <input type="text" class="form-control" name="redirect_url" value="/console/items/" hidden>
+          </div>
+          <div class="container mb-2">
+            <label for="photo">Image:</label>
+            <input type="file" name="photo" id="photo" class="form-control" accept="image/*">
+          </div>
+          <hr>
+          <div class="container">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit Items -->
+<div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editItemTitle">Edit Item</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/api/edit_item/" method="post" enctype="multipart/form-data">
+          <div class="container mb-2">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" name="edit_name" id="edit_name">
+            <input type="text" class="form-control" name="redirect_url" value="/console/items/" hidden>
+            <input type="text" class="form-control" name="id" id="edit_id" hidden>
+          </div>
+          <div class="container mb-2">
+            <label for="photo">Image:</label>
+            <input type="file" name="edit_photo" id="photo" class="form-control" accept="image/*">
+          </div>
+          <hr>
+          <div class="container">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+{{ end }}
+
+{{ define "script" }}
+<script src="/static/js/common.js"></script>
+<script>
+  function openItem(id) {
+    $('#editItemModal').modal('show')
+    $.ajax({
+      url: "/uadmin/api/d/item/read/?id=" + id,
+      method: "get",
+      success: function (resp) {
+        console.log(resp["result"][0])
+        var data = resp["result"][0]
+        $('#edit_name').val(data.Name)
+        $('#edit_photo').val(data.Level)
+        $('#edit_id').val(data.ID)
+      }
+    })
+  }
+</script>
+{{ end }}

@@ -146,3 +146,43 @@ func SettingsHandler(w http.ResponseWriter, r *http.Request) map[string]interfac
 	context["Title"] = "Settings"
 	return context
 }
+
+func ItemsHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
+	context := map[string]interface{}{}
+
+	line := []models.InventoryLine{}
+	uadmin.All(&line)
+	for i := range line {
+		uadmin.Preload(&line[i])
+	}
+
+	context["Items"] = line
+	context["Title"] = "Items - Inventory"
+	return context
+}
+
+func TransactionHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
+	context := map[string]interface{}{}
+
+	transactions := []models.Transaction{}
+	uadmin.All(&transactions)
+	for i := range transactions {
+		uadmin.Preload(transactions[i])
+		uadmin.Preload(transactions[i].Enforcer)
+	}
+	items := []models.Item{}
+	uadmin.All(&items)
+
+	session := uadmin.IsAuthenticated(r)
+	enforcer := models.Enforcers{}
+	uadmin.Get(&enforcer, "user_id = ?", session.UserID)
+	uadmin.Preload(&enforcer)
+	uadmin.Preload(&enforcer.User)
+
+	// context["User"] = session.User
+	context["Enforcer"] = enforcer
+	context["Items"] = items
+	context["Transactions"] = transactions
+	context["Title"] = "Items - Inventory"
+	return context
+}

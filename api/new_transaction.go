@@ -87,6 +87,7 @@ func NewTransaction(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		}
+		http.Redirect(w, r, "/console/transactions/", http.StatusSeeOther)
 	}
 }
 

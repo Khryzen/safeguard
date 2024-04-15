@@ -167,8 +167,8 @@ func TransactionHandler(w http.ResponseWriter, r *http.Request) map[string]inter
 	transactions := []models.Transaction{}
 	uadmin.All(&transactions)
 	for i := range transactions {
-		uadmin.Preload(transactions[i])
-		uadmin.Preload(transactions[i].Enforcer)
+		uadmin.Preload(&transactions[i])
+		uadmin.Preload(&transactions[i].Enforcer)
 	}
 	items := []models.Item{}
 	uadmin.All(&items)

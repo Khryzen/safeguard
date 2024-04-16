@@ -1,9 +1,202 @@
+{{ define "style" }}
+
+<style>
+  .stat-cards-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 24px 19px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 15px 50px rgba(160, 163, 189, 0.1);
+  box-shadow: 0px 15px 50px rgba(160, 163, 189, 0.1);
+  border-radius: 10px;
+  height: 100%;
+
+  .stat-cards-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 9px;
+}
+
+.stat-cards-icon.primary {
+  background-color: rgba(47, 73, 209, 0.1);
+  color: #2f49d1;
+}
+
+.stat-cards-icon.warning {
+  background-color: rgba(255, 182, 72, 0.1);
+  color: #ffb648;
+}
+
+.stat-cards-icon.purple {
+  background-color: rgba(95, 46, 234, 0.1);
+  color: #5f2eea;
+}
+
+.stat-cards-icon.success {
+  background-color: rgba(75, 222, 151, 0.1);
+  color: #4bde97;
+}
+.stat-cards-icon.danger {
+  background-color: rgba(222, 75, 75, 0.1);
+  color: #de4b4b;
+}
+
+.stat-cards-info__num {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #171717;
+  margin-bottom: 4px;
+}
+
+.stat-cards-info__title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.22;
+  color: #b9b9b9;
+  margin-bottom: 6px;
+}
+
+.stat-cards-info__progress {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.22;
+  color: #b9b9b9;
+}
+
+.stat-cards-info__profit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.22;
+  margin-right: 10px;
+}
+
+.stat-cards-info__profit.success {
+  color: #4bde97;
+}
+
+.stat-cards-info__profit.danger {
+  color: #f26464;
+}
+
+.stat-cards-info__profit.warning {
+  color: #ffb648;
+}
+
+.stat-cards-info__profit svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+}
+</style>
+{{ end }}
 {{ define "content" }}
 <div class="container">
-  <div class="row">
-    <div id="chart" class="col-12"></div>
-    <div id="breakup" class="col-6"></div>
-    <div id="earning" class="col-6"></div>
+  <div class="row mt-5">
+    <div class="col-md-6 col-xl-4">
+      <article class="stat-cards-item">
+        <div class="stat-cards-icon danger">
+          <i data-feather="user" aria-hidden="true"></i>
+        </div>
+        <div class="stat-cards-info">
+          <p class="stat-cards-info__num">1</p>
+          <p class="stat-cards-info__title">Total Enforcers</p>
+        </div>
+      </article>
+    </div>
+        
+
+    <div class="col-md-6 col-xl-4">
+      <article class="stat-cards-item">
+        <div class="stat-cards-icon danger">
+          <i data-feather="message-circle" aria-hidden="true"></i>
+        </div>
+        <div class="stat-cards-info">
+          <p class="stat-cards-info__num">1</p>
+          <p class="stat-cards-info__title">Total SMS Subscriber</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+      <article class="stat-cards-item">
+        <div class="stat-cards-icon danger">
+          <i data-feather="alert-circle" aria-hidden="true"></i>
+        </div>
+        <div class="stat-cards-info">
+          <p class="stat-cards-info__num">1</p>
+          <p class="stat-cards-info__title">Total Incident Report</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6 col-xl-4">
+      <article class="stat-cards-item">
+        <div class="stat-cards-icon danger">
+          <i data-feather="package" aria-hidden="true"></i>
+        </div>
+        <div class="stat-cards-info">
+          <p class="stat-cards-info__num">1</p>
+          <p class="stat-cards-info__title">Total Items</p>
+        </div>
+      </article>
+    </div>
+        
+
+    <div class="col-md-6 col-xl-4">
+      <article class="stat-cards-item">
+        <div class="stat-cards-icon danger">
+          <i data-feather="book" aria-hidden="true"></i>
+        </div>
+        <div class="stat-cards-info">
+          <p class="stat-cards-info__num">1</p>
+          <p class="stat-cards-info__title">Total Transactions</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+      <article class="stat-cards-item">
+        <div class="stat-cards-icon danger">
+          <i data-feather="shopping-bag" aria-hidden="true"></i>
+        </div>
+        <div class="stat-cards-info">
+          <p class="stat-cards-info__num">1</p>
+          <p class="stat-cards-info__title">Out of Stock Items</p>
+        </div>
+      </article>
+    </div>
   </div>
 </div>
 {{ end }}

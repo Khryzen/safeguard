@@ -28,13 +28,13 @@
         <div class="row">
         {{ range .Enforcers }}
           <div class="col-3 col-md-4 col-sm-12 col-xs-12">
-            <div class="card" style="max-width: 280px; min-width: 280px;">
+            <div class="card" style="max-width: 280px; min-width: 280px;" onclick="editEnforcer('{{ .ID }}')">
               <img src="{{ .User.Photo }}" class="card-img-top" style="max-height: 280px;max-width: 280px; min-width: 280px; min-height: 280px;">
               <div class="card-body">
                 <h5 class="card-title">{{ .User.FirstName }} {{ .User.LastName }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ .Position }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted ">{{ .EnforcerType.Designation }}</h6>
-                <p class="card-text" style="white-space: nowrap;text-overflow: ellipsis;">{{ .EnforcerType.Role }}</p>
+                <p class="card-text" style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 250px;">{{ .EnforcerType.Role }}</p>
               </div>
             </div>
           </div>
@@ -97,5 +97,74 @@
       </div>
     </div>
   </div>
+
+  <!-- Edit enforcer -->
+  <div class="modal fade" id="editEnforcerModal" tabindex="-1" aria-labelledby="editEnforcerTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newEnforcerTitle">Edit Enforcer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/api/edit_enforcer/" method="post" enctype="multipart/form-data">
+            <div class="container mb-2">
+              <label for="firstName">First Name:</label>
+              <input type="text" class="form-control" name="efirstName" id="efName">
+              <input type="text" class="form-control" name="redirect_url" id="redirect_url" value="/console/enforcers/" hidden>
+              <input type="text" class="form-control" name="id" id="id" hidden>
+            </div>
+            <div class="container mb-2">
+              <label for="lastName">Last Name:</label>
+              <input type="text" class="form-control" name="elastName" id="elName">
+            </div>
+            <div class="container mb-2">
+              <label for="emailAddress">Email Address:</label>
+              <input type="email" class="form-control" name="eemailAddress" id="eemailAddress">
+            </div>
+            <div class="container mb-2">
+              <label for="position">Position:</label>
+              <input type="text" class="form-control" name="eposition" id="eposition">
+            </div>
+            <div class="container mb-2">
+              <label for="photo">Image:</label>
+              <input type="file" class="form-control" name="ephoto" id="ephoto" accept="image/*">
+            </div>
+            <div class="container mb-2">
+              <label for="enforcerType">Enforcer Type: </label>
+              <select name="eenforcerType" id="eenforcerType" class="form-control">
+                <option value="-" selected hidden>Choose ...</option>
+                {{ range .EnforcerTypes }}
+                <option value="{{ .ID }}">{{ .Designation }}</option>
+                {{ end }}
+                <!-- TODO: Add the dynamic values here -->
+              </select>
+            </div>
+            <hr>
+            <div class="container">
+              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+{{ end }}
+{{ define "script" }}
+<script>
+  function editEnforcer(id){
+    $('#editEnforcerModal').modal("show")
+    $.get('/uadmin/api/d/enforcers/read/?id='+id+'&$preload=1', function(v){
+      var data = v["result"][0]
+      $('#id').val(data.ID)
+      $('#efName').val(data.User.FirstName)
+      $('#elName').val(data.User.LastName)
+      $('#eemailAddress').val(data.User.Email)
+      $('#eposition').val(data.Position)
+      $('#eenforcerType').val(data.EnforcerTypeID)
+    })
+  }
+</script>
 {{ end }}

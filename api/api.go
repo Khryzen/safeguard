@@ -33,6 +33,8 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		EditItem(w, r)
 	case "new_transaction":
 		NewTransaction(w, r)
+	case "new_notif":
+		NewNotification(w, r)
 	default:
 		InvalidAPI(w, r)
 	}

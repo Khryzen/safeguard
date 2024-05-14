@@ -1,0 +1,21 @@
+{{ define "content" }}
+<div class="container">
+  <form action="/api/new_notif/" method="post">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name:</label>
+      <input type="text" class="form-control" name="name" pattern="[a-zA-Z\s\-]*" placeholder="Juan Dela Cruz" required>
+    </div>
+    <div class="mb-3">
+      <label for="cellnumber" class="form-label">Cellphone Number:</label>
+      <input type="text" class="form-control" name="cellnumber" pattern="09\d{9}" placeholder="09xxxxxxxxx" required>
+    </div>
+    <div class="mb-3">
+      <label for="emergency" class="form-label">Describe your emergency:</label>
+      <textarea class="form-control" name="emergency" rows="5"></textarea>
+    </div>
+    <div class="mb-3">
+      <input type="submit" value="Submit" class="form-control btn btn-primary">
+    </div>
+  </form>
+</div>
+{{ end }}

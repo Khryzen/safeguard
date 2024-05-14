@@ -11,12 +11,12 @@
 </head>
 <body>
   <main id="main_body">
-    <div class="container p-3 pb-0 border-bottom bg-main">
+    <div class="container p-3 pb-0 border-bottom bg-main" id="banner">
       <h3>Welcome to Safeguard 24/7</h3>
     </div>
     {{ template "content" . }}
   </main>
-  <!-- <footer> -->
+  <footer>
     <nav class="mobile-bottom-nav">
       <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active" id="home">
         <div class="mobile-bottom-nav__item-content">
@@ -32,7 +32,7 @@
       </div>
       <div class="mobile-bottom-nav__item" id="help">
         <div class="mobile-bottom-nav__item-content">
-          <i class="fa fa-phone"></i>
+          <i class="fa fa-phone" style="transform: rotate(90deg);"></i>
           Call for Help
         </div>
       </div>
@@ -44,7 +44,7 @@
         </div>
       </div>
     </nav>
-  <!-- </footer> -->
+  </footer>
 <script src="/static/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/static/libs/jquery/dist/jquery.min.js"></script>
 <script src="/static/js/mobile.js"></script>

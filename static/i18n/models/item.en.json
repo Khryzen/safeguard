@@ -1,5 +1,5 @@
 {
-  "display_name": "Alert Level",
+  "display_name": "Item",
   "fields": {
     "ID": {
       "display_name": "ID",
@@ -8,8 +8,8 @@
       "err_msg": {},
       "Choices": {}
     },
-    "Level": {
-      "display_name": "Level",
+    "Image": {
+      "display_name": "Image",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},

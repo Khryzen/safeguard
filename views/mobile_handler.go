@@ -8,12 +8,6 @@ import (
 )
 
 func MobileHandler(w http.ResponseWriter, r *http.Request) {
-	session := uadmin.IsAuthenticated(r)
-	if session == nil {
-		http.Redirect(w, r, "/login/", http.StatusSeeOther)
-		return
-	}
-
 	r.URL.Path = strings.TrimPrefix(r.URL.Path, "/mobile/")
 	page := strings.TrimSuffix(r.URL.Path, "/")
 
@@ -25,6 +19,10 @@ func MobileHandler(w http.ResponseWriter, r *http.Request) {
 		context = MobileDashboardHandler(w, r)
 	case "enforcers":
 		context = EnforcerMobileHandler(w, r)
+	case "help":
+		context = HelpMobileHandler(w, r)
+	case "about":
+		context = AboutMobileHandler(w, r)
 	default:
 		page = "dashboard"
 		context = MobileDashboardHandler(w, r)

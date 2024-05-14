@@ -7,3 +7,19 @@ navItems.forEach(function (e, i) {
 		this.classList.add("mobile-bottom-nav__item--active");
 	});
 });
+
+$('#home').on('click', function(){
+	$('#main_body').load((window.location.href).split('/mobile/')[0] + '/mobile/dashboard' + ' #main_body');
+})
+
+$('#enforcers').on('click', function(){
+	$('#main_body').load((window.location.href).split('/mobile/')[0] +'/mobile/enforcers'+ ' #main_body');
+})
+
+$('#help').on('click', function () {
+	$('#main_body').load((window.location.href).split('/mobile/')[0] + '/mobile/help' + ' #main_body');
+})
+
+$('#about').on('click', function () {
+	$('#main_body').load((window.location.href).split('/mobile/')[0] + '/mobile/about' + ' #main_body');
+})

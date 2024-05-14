@@ -1,5 +1,5 @@
 {
-  "display_name": "Alert Level",
+  "display_name": "Inventory Line",
   "fields": {
     "ID": {
       "display_name": "ID",
@@ -8,15 +8,15 @@
       "err_msg": {},
       "Choices": {}
     },
-    "Level": {
-      "display_name": "Level",
+    "Item": {
+      "display_name": "Item",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},
       "Choices": {}
     },
-    "Name": {
-      "display_name": "Name",
+    "Remaining": {
+      "display_name": "Remaining",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},

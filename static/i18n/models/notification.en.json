@@ -1,36 +1,22 @@
 {
-  "display_name": "Protocols",
+  "display_name": "Notification",
   "fields": {
-    "Active": {
-      "display_name": "Active",
+    "CellNumber": {
+      "display_name": "Cell Number",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},
       "Choices": {}
     },
-    "AlertLevel": {
-      "display_name": "Alert Level",
+    "Emergency": {
+      "display_name": "Emergency",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},
       "Choices": {}
     },
-    "Code": {
-      "display_name": "Code",
-      "help": "",
-      "pattern_msg": "",
-      "err_msg": {},
-      "Choices": {}
-    },
-    "Description": {
-      "display_name": "Description",
-      "help": "",
-      "pattern_msg": "",
-      "err_msg": {},
-      "Choices": {}
-    },
-    "Disasters": {
-      "display_name": "Disasters",
+    "Enforcer": {
+      "display_name": "Enforcer",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},
@@ -45,6 +31,13 @@
     },
     "Name": {
       "display_name": "Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Responded": {
+      "display_name": "Responded",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},

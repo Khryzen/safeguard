@@ -1,20 +1,6 @@
 {
-  "display_name": "Protocols",
+  "display_name": "Transaction",
   "fields": {
-    "Active": {
-      "display_name": "Active",
-      "help": "",
-      "pattern_msg": "",
-      "err_msg": {},
-      "Choices": {}
-    },
-    "AlertLevel": {
-      "display_name": "Alert Level",
-      "help": "",
-      "pattern_msg": "",
-      "err_msg": {},
-      "Choices": {}
-    },
     "Code": {
       "display_name": "Code",
       "help": "",
@@ -22,15 +8,8 @@
       "err_msg": {},
       "Choices": {}
     },
-    "Description": {
-      "display_name": "Description",
-      "help": "",
-      "pattern_msg": "",
-      "err_msg": {},
-      "Choices": {}
-    },
-    "Disasters": {
-      "display_name": "Disasters",
+    "Enforcer": {
+      "display_name": "Enforcer",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},
@@ -43,8 +22,22 @@
       "err_msg": {},
       "Choices": {}
     },
-    "Name": {
-      "display_name": "Name",
+    "Item": {
+      "display_name": "Item",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Quantity": {
+      "display_name": "Quantity",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "TransactionType": {
+      "display_name": "Transaction Type",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},

@@ -17,6 +17,7 @@ func main() {
 		models.EnforcerType{},
 		models.Enforcers{},
 		models.IncidentReport{},
+		models.Notification{},
 		models.Protocols{},
 
 		// Inventory Models
@@ -58,6 +59,7 @@ func main() {
 	http.HandleFunc("/register/", uadmin.Handler(views.SMSRegister))
 	http.HandleFunc("/logout/", uadmin.Handler(views.LogoutHandler))
 
+	uadmin.PublicMedia = true
 	uadmin.Port = 9880
 	uadmin.RootURL = "/uadmin/"
 

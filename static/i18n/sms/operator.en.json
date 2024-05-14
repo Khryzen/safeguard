@@ -1,36 +1,15 @@
 {
-  "display_name": "Protocols",
+  "display_name": "Operator",
   "fields": {
-    "Active": {
-      "display_name": "Active",
+    "Error": {
+      "display_name": "Error",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},
       "Choices": {}
     },
-    "AlertLevel": {
-      "display_name": "Alert Level",
-      "help": "",
-      "pattern_msg": "",
-      "err_msg": {},
-      "Choices": {}
-    },
-    "Code": {
-      "display_name": "Code",
-      "help": "",
-      "pattern_msg": "",
-      "err_msg": {},
-      "Choices": {}
-    },
-    "Description": {
-      "display_name": "Description",
-      "help": "",
-      "pattern_msg": "",
-      "err_msg": {},
-      "Choices": {}
-    },
-    "Disasters": {
-      "display_name": "Disasters",
+    "From": {
+      "display_name": "From",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},
@@ -43,8 +22,43 @@
       "err_msg": {},
       "Choices": {}
     },
-    "Name": {
-      "display_name": "Name",
+    "Message": {
+      "display_name": "Message",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Phone": {
+      "display_name": "Phone",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Response": {
+      "display_name": "Response",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "SenderName": {
+      "display_name": "Sender Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Type": {
+      "display_name": "Type",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Username": {
+      "display_name": "Username",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},

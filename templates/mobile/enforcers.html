@@ -1,0 +1,19 @@
+{{ define "content" }}
+<div class="container p-3">
+  {{ range .Enforcers }}
+  <div class="card mb-3 bg-main">
+    <img src="{{ .User.Photo }}" class="card-img-top" alt="{{ .User.LastName }}, {{ .User.FirstName }}">
+    <div class="card-header">
+      <h3 class="text-center">
+        {{ .User.FirstName }} {{ .User.LastName }}
+      </h3>
+    </div>
+    <div class="card-body">
+      <p class="text-center">{{ .Position }}</p>
+      <p class="text-center">{{ .EnforcerType.Designation }}</p>
+      <p class="text-center">{{ .User.Email }}</p>
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}

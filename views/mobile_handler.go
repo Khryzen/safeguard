@@ -23,6 +23,8 @@ func MobileHandler(w http.ResponseWriter, r *http.Request) {
 	switch page {
 	case "dashboard":
 		context = MobileDashboardHandler(w, r)
+	case "enforcers":
+		context = EnforcerMobileHandler(w, r)
 	default:
 		page = "dashboard"
 		context = MobileDashboardHandler(w, r)

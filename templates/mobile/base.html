@@ -10,31 +10,34 @@
   <title>SafeGuard 24/7</title>
 </head>
 <body>
-  <main>
+  <main id="main_body">
+    <div class="container p-3 pb-0 border-bottom bg-main">
+      <h3>Welcome to Safeguard 24/7</h3>
+    </div>
     {{ template "content" . }}
   </main>
   <!-- <footer> -->
     <nav class="mobile-bottom-nav">
-      <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+      <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active" id="home">
         <div class="mobile-bottom-nav__item-content">
           <i class="fa fa-home"></i>
           Home
         </div>
       </div>
-      <div class="mobile-bottom-nav__item">
+      <div class="mobile-bottom-nav__item" id="enforcers">
         <div class="mobile-bottom-nav__item-content">
           <i class="fa fa-envelope"></i>
           Enforcers
         </div>
       </div>
-      <div class="mobile-bottom-nav__item">
+      <div class="mobile-bottom-nav__item" id="help">
         <div class="mobile-bottom-nav__item-content">
           <i class="fa fa-phone"></i>
           Call for Help
         </div>
       </div>
 
-      <div class="mobile-bottom-nav__item">
+      <div class="mobile-bottom-nav__item" id="about"> 
         <div class="mobile-bottom-nav__item-content">
           <i class="fa fa-address-book"></i>
           About Us
@@ -43,6 +46,7 @@
     </nav>
   <!-- </footer> -->
 <script src="/static/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/libs/jquery/dist/jquery.min.js"></script>
 <script src="/static/js/mobile.js"></script>
 <script src="/static/libs/plugins/feather.min.js"></script>
 <script>

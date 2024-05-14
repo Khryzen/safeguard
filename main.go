@@ -5,6 +5,7 @@ import (
 
 	"github.com/mbdeguzman/safeguard/api"
 	"github.com/mbdeguzman/safeguard/models"
+	"github.com/mbdeguzman/safeguard/sms"
 	"github.com/mbdeguzman/safeguard/views"
 	"github.com/uadmin/uadmin"
 )
@@ -25,6 +26,8 @@ func main() {
 
 		// SMS Model
 		models.SMSSubscriber{},
+
+		sms.Operator{},
 	)
 
 	category := uadmin.SettingCategory{}

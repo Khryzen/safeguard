@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/libs/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/libs/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/mobile.css">  
+  {{ template "style" . }}
+  <title>SafeGuard 24/7</title>
+</head>
+<body>
+  <main>
+    {{ template "content" . }}
+  </main>
+  <!-- <footer> -->
+    <nav class="mobile-bottom-nav">
+      <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+        <div class="mobile-bottom-nav__item-content">
+          <i class="fa fa-home"></i>
+          Home
+        </div>
+      </div>
+      <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+          <i class="fa fa-envelope"></i>
+          Enforcers
+        </div>
+      </div>
+      <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+          <i class="fa fa-phone"></i>
+          Call for Help
+        </div>
+      </div>
+
+      <div class="mobile-bottom-nav__item">
+        <div class="mobile-bottom-nav__item-content">
+          <i class="fa fa-address-book"></i>
+          About Us
+        </div>
+      </div>
+    </nav>
+  <!-- </footer> -->
+<script src="/static/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/js/mobile.js"></script>
+<script src="/static/libs/plugins/feather.min.js"></script>
+<script>
+  feather.replace();
+</script>
+{{ template "script" . }}
+
+{{ define "style" }}{{ end }}
+{{ define "script" }}{{ end }}
+</body>
+</html>

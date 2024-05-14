@@ -1,0 +1,179 @@
+:root {
+  --primary-color: background-color: #ffffff;
+  background-image: linear-gradient(315deg, #ffffff 0%, #5899e2 74%);
+  ;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  /* Font family name */
+  src: url('/static/typefaces/Poppins/Poppins-Regular.ttf') format('truetype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+main {
+  background-color: #F5F6F8;
+  min-height: 90vh;
+}
+
+/* NAVBAR */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  will-change: transform;
+  transform: translateZ(0);
+  display: flex;
+  height: 10vh;
+  box-shadow: 0 -2px 5px -2px #333;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+}
+
+.bg-main{
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  -webkit-box-shadow: 0px 15px 50px rgba(160, 163, 189, 0.1);
+  box-shadow: 0px 15px 50px rgba(160, 163, 189, 0.1);
+}
+.mobile-bottom-nav__item {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mobile-bottom-nav__item--active {
+  color: #5D87FF;
+}
+
+.mobile-bottom-nav__item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-cards-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 24px 19px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 15px 50px rgba(160, 163, 189, 0.1);
+  box-shadow: 0px 15px 50px rgba(160, 163, 189, 0.1);
+  border-radius: 10px;
+  height: 100%;
+}
+  .stat-cards-icon {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 9px;
+  }
+
+  .stat-cards-icon.primary {
+    background-color: rgba(47, 73, 209, 0.1);
+    color: #2f49d1;
+  }
+
+  .stat-cards-icon.warning {
+    background-color: rgba(255, 182, 72, 0.1);
+    color: #ffb648;
+  }
+
+  .stat-cards-icon.purple {
+    background-color: rgba(95, 46, 234, 0.1);
+    color: #5f2eea;
+  }
+
+  .stat-cards-icon.success {
+    background-color: rgba(75, 222, 151, 0.1);
+    color: #4bde97;
+  }
+
+  .stat-cards-icon.danger {
+    background-color: rgba(222, 75, 75, 0.1);
+    color: #de4b4b;
+  }
+
+  .stat-cards-info__num {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1.22;
+    color: #171717;
+    margin-bottom: 4px;
+  }
+
+  .stat-cards-info__title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.22;
+    color: #b9b9b9;
+    margin-bottom: 6px;
+  }
+
+  .stat-cards-info__progress {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.22;
+    color: #b9b9b9;
+  }
+
+  .stat-cards-info__profit {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.22;
+    margin-right: 10px;
+  }
+
+  .stat-cards-info__profit.success {
+    color: #4bde97;
+  }
+
+  .stat-cards-info__profit.danger {
+    color: #f26464;
+  }
+
+  .stat-cards-info__profit.warning {
+    color: #ffb648;
+  }
+
+  .stat-cards-info__profit svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+  }

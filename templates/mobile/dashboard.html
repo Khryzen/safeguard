@@ -11,7 +11,7 @@
         <i class="fa fa-user text-primary" aria-hidden="true"></i>
       </div>
       <div class="stat-cards-info">
-        <p class="stat-cards-info__num">1</p>
+        <p class="stat-cards-info__num">{{ .Enforcers }}</p>
         <p class="stat-cards-info__title">Total Enforcers</p>
       </div>
     </article>
@@ -28,7 +28,7 @@
           <i class="fa fa-envelope text-secondary" aria-hidden="true"></i>
         </div>
         <div class="stat-cards-info">
-          <p class="stat-cards-info__num">1</p>
+          <p class="stat-cards-info__num">{{ .IncidentReport }}</p>
           <p class="stat-cards-info__title">Total Incident Reports</p>
         </div>
       </article>
@@ -45,7 +45,7 @@
           <i class="fa fa-sun text-danger"></i>
         </div>
         <div class="stat-cards-info">
-          <p class="stat-cards-info__num">1</p>
+          <p class="stat-cards-info__num">{{ .Disasters }}</p>
           <p class="stat-cards-info__title">Active Disaster</p>
         </div>
       </article>

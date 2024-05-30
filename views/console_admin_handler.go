@@ -9,7 +9,30 @@ import (
 
 func DashboardHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
+	enforcers := models.Enforcers{}
+	active_enforcer := uadmin.Count(&enforcers, "active = ?", true)
 
+	sms := models.SMSSubscriber{}
+	sms_subscriber := uadmin.Count(&sms, "id > 0")
+
+	incident := models.IncidentReport{}
+	incident_count := uadmin.Count(&incident, "id > 0")
+
+	items := models.Item{}
+	item_count := uadmin.Count(&items, "id > 0")
+
+	transactions := models.Transaction{}
+	transaction_count := uadmin.Count(&transactions, "id > 0")
+
+	stocks := models.InventoryLine{}
+	stocks_count := uadmin.Count(&stocks, "remaining = ?", 0)
+
+	context["Enforcers"] = active_enforcer
+	context["SMS"] = sms_subscriber
+	context["IncidentReport"] = incident_count
+	context["Items"] = item_count
+	context["Transactions"] = transaction_count
+	context["Stocks"] = stocks_count
 	context["Title"] = "Dashboard"
 	return context
 }

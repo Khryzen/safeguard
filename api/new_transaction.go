@@ -67,7 +67,7 @@ func NewTransaction(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if int(transaction_type) == 2 {
-			if line.Remaining > int(qty) {
+			if line.Remaining >= int(qty) {
 				transaction.Code = generateCode()
 				transaction.ItemID = uint(item_id)
 				transaction.Quantity = int(qty)
@@ -76,7 +76,7 @@ func NewTransaction(w http.ResponseWriter, r *http.Request) {
 				uadmin.Save(&transaction)
 
 				line.ItemID = uint(item_id)
-				line.Remaining += int(qty)
+				line.Remaining -= int(qty)
 				uadmin.Save(&line)
 			} else {
 				w.WriteHeader(http.StatusBadRequest)

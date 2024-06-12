@@ -2,6 +2,7 @@ package views
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/mbdeguzman/safeguard/models"
 	"github.com/uadmin/uadmin"
@@ -27,6 +28,24 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) map[string]interfa
 	stocks := models.InventoryLine{}
 	stocks_count := uadmin.Count(&stocks, "remaining = ?", 0)
 
+	now := time.Now()
+	month_start := time.Date(now.Year(), now.Month(), 1, 0, 0, 0, 0, now.Location())
+	// Calculate the start of the next month
+	nextMonth := now.Month() + 1
+	nextMonthYear := now.Year()
+	if nextMonth > 12 {
+		nextMonth = 1
+		nextMonthYear++
+	}
+	month_end := time.Date(nextMonthYear, nextMonth, 1, 0, 0, 0, 0, now.Location())
+	incidents := []models.IncidentReport{}
+	uadmin.FilterSorted("incident_date", false, &incidents, "incident_date > ? AND incident_date < ?", month_start, month_end)
+
+	transactionChart := []models.Transaction{}
+	uadmin.FilterSorted("created_at", false, &transactionChart, "created_at > ? AND created_at < ?", month_start, month_end)
+
+	context["Incidents"] = incidents
+	context["TransactionsChart"] = transactionChart
 	context["Enforcers"] = active_enforcer
 	context["SMS"] = sms_subscriber
 	context["IncidentReport"] = incident_count

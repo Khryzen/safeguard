@@ -198,5 +198,96 @@
       </article>
     </div>
   </div>
+  <div class="row mt-5">
+    <div class="col-6 col-md-12 col-sm-12">
+      <h4>Incidents this Month</h4>
+      <canvas id="incidentCharts"></canvas>
+    </div>
+  </div>
+  <hr class="m-5">
+  <div class="col-6 col-md-12 col-sm-12">
+    <h4>Transactions this Month (In and Out)</h4>
+    <canvas id="transactionCharts"></canvas>
+  </div>
+  </div>
 </div>
+{{ end }}
+
+{{ define "script" }}
+<script src="/static/libs/chart/chart.min.js"></script>
+<script>
+var incidents_current_month = []
+{{ range .Incidents }}
+var incident_date_current_month = '{{ .IncidentDate }}'
+var v = incident_date_current_month.split(" ")[0]
+  incidents_current_month.push(v)
+{{ end }}
+let countOccurrences = incidents_current_month.reduce((accumulator, currentValue) => {
+  if (accumulator[currentValue]) {
+    accumulator[currentValue]++;
+  } else {
+    accumulator[currentValue] = 1;
+  }
+  return accumulator;
+}, {});
+let incidentsLabelArr = Object.keys(countOccurrences);
+let incidentsDataArr = Object.values(countOccurrences);
+
+var incidents_ctx = $("#incidentCharts").get(0).getContext("2d");
+var incidents = new Chart(incidents_ctx, {
+  type: "line",
+  data: {
+    labels: incidentsLabelArr,
+    datasets: [{
+      label: "Incidents Occurred this Month",
+      fill: false,
+      backgroundColor: "rgba(235, 22, 22, .7)",
+      borderColor: "#13DEB9",
+      data: incidentsDataArr
+    }]
+  },
+  options: {
+    responsive: true
+  }
+});
+
+// Transaction Charts
+
+  var transactions_current_month = []
+
+  {{ range .TransactionsChart }}
+  var transactions_date_current_month = '{{ .CreatedAt }}'
+  var v = transactions_date_current_month.split(" ")[0]
+  transactions_current_month.push(v)
+  {{ end }}
+  let transactionsOccurrence = transactions_current_month.reduce((accumulator, currentValue) => {
+    if (accumulator[currentValue]) {
+      accumulator[currentValue]++;
+    } else {
+      accumulator[currentValue] = 1;
+    }
+    return accumulator;
+  }, {});
+  let transactionsLabelArr = Object.keys(transactionsOccurrence);
+  let transactionsDataArr = Object.values(transactionsOccurrence);
+
+  var transactions_ctx = $("#transactionCharts").get(0).getContext("2d");
+  var transactions = new Chart(transactions_ctx, {
+    type: "line",
+    data: {
+      labels: transactionsLabelArr,
+      datasets: [{
+        label: "Transactions this Month (In and Out)",
+        fill: false,
+        backgroundColor: "rgba(235, 22, 22, .7)",
+        borderColor: "#13DEB9",
+        data: transactionsDataArr
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+
+</script>
 {{ end }}

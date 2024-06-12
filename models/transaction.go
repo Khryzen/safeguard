@@ -1,6 +1,10 @@
 package models
 
-import "github.com/uadmin/uadmin"
+import (
+	"time"
+
+	"github.com/uadmin/uadmin"
+)
 
 type Transaction struct {
 	uadmin.Model
@@ -11,6 +15,7 @@ type Transaction struct {
 	TransactionType TransactionType
 	Enforcer        Enforcers
 	EnforcerID      uint
+	CreatedAt       *time.Time	
 }
 
 type TransactionType int

@@ -225,19 +225,27 @@
 
     if (mode == 'light') {
       $('body').attr('data-bs-theme', 'light');
-      $('.app-header').css('background', '#fff')
-      $('.left-sidebar').css('background-color', '#fff')
-      $('.sidebar-link').css('color', '#000')
-      $('.nav-small-cap').css('color', '#2A3547')
-      $('.nav-link').css('color', '#2A3547')
+      $('.app-header').css('background', '#fff');
+      $('.left-sidebar').css('background-color', '#fff');
+      $('.sidebar-link').css('color', '#000');
+      $('.nav-small-cap').css('color', '#2A3547');
+      $('.nav-link').css('color', '#2A3547');
+      $('.card-title').css('color', '--bs-card-title-color');
+      $('label').css('color', '--bs-card-title-color');
+      $('input,textarea,select').css('color', '--bs-card-title-color');
+      $('table').removeClass('table-dark');
     }
 
     if (mode == 'dark') {
       $('body').attr('data-bs-theme', 'dark');
-      $('.app-header').css('background', '#212529')
-      $('.left-sidebar').css('background-color', '#212529')
-      $('.sidebar-link').css('color', '#fff')
-      $('.nav-small-cap').css('color', '#fff')
+      $('.app-header').css('background', '#212529');
+      $('.left-sidebar').css('background-color', '#212529');
+      $('.sidebar-link').css('color', '#fff');
+      $('.nav-small-cap').css('color', '#fff');
+      $('.card-title').css('color', '#fff');
+      $('label').css('color', '#fff');
+      $('input,textarea,select').css('color', '#fff');
+      $('table').addClass('table-dark');
     }
 
 

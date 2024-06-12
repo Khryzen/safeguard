@@ -1,6 +1,10 @@
 package models
 
-import "github.com/uadmin/uadmin"
+import (
+	"time"
+
+	"github.com/uadmin/uadmin"
+)
 
 type Notification struct {
 	uadmin.Model
@@ -10,4 +14,5 @@ type Notification struct {
 	Responded  bool
 	Enforcer   Enforcers
 	EnforcerID uint
+	CreatedAt  time.Time
 }

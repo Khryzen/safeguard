@@ -209,3 +209,10 @@ func TransactionHandler(w http.ResponseWriter, r *http.Request) map[string]inter
 	context["Title"] = "Items - Inventory"
 	return context
 }
+
+func NotificationsHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
+	context := map[string]interface{}{}
+
+	context["Title"] = "Notifications"
+	return context
+}

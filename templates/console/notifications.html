@@ -1,0 +1,36 @@
+{{ define "content" }}
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <!-- TODO: Loop through the enforcers; use cards as details -->
+        <table class="table table-striped table-responsive">
+          <thead class="thead-default">
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Contact Number</th>
+              <th>Emergency Details</th>
+              <th>Enforcer</th>
+              <th>Responded</th>
+            </tr>
+          </thead>
+          <tbody id="alert_tbody">
+            {{ range .Alerts }}
+            <tr>
+              <td onclick="openAlert('{{ .ID }}')">{{ .Name }}</td>
+              <td>{{ .Level }}</td>
+              <td onclick="deleteAlert('{{ .ID }}')"><i class="fa fa-trash" aria-hidden="true"></i></td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ define "script" }}
+<script src="/static/js/common.js"></script>
+{{ end }}

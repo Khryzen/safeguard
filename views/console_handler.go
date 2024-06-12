@@ -42,6 +42,8 @@ func ConsoleHandler(w http.ResponseWriter, r *http.Request) {
 		context = ItemsHandler(w, r)
 	case "transactions":
 		context = TransactionHandler(w, r)
+	case "notifications":
+		context = NotificationsHandler(w, r)
 	default:
 		page = "dashboard"
 		context = DashboardHandler(w, r)

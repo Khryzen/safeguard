@@ -8,6 +8,13 @@
       "err_msg": {},
       "Choices": {}
     },
+    "CreatedAt": {
+      "display_name": "Created At",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
     "Emergency": {
       "display_name": "Emergency",
       "help": "",

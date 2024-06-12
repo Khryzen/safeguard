@@ -13,14 +13,25 @@
               <th>Emergency Details</th>
               <th>Enforcer</th>
               <th>Responded</th>
+              <th>Respond</th>
             </tr>
           </thead>
-          <tbody id="alert_tbody">
-            {{ range .Alerts }}
+          <tbody id="notifications-tbody">
+            {{ $enforcer := .Enforcer.ID }}
+            {{ range .Notifications }}
             <tr>
-              <td onclick="openAlert('{{ .ID }}')">{{ .Name }}</td>
-              <td>{{ .Level }}</td>
-              <td onclick="deleteAlert('{{ .ID }}')"><i class="fa fa-trash" aria-hidden="true"></i></td>
+              <td class="createdAt">{{ .CreatedAt }}</td>
+              <td>{{ .Name }}</td>
+              <td>{{ .CellNumber }}</td>
+              <td>{{ .Emergency }}</td>
+              <td>{{ .Enforcer.User.FirstName }} {{ .Enforcer.User.LastName }}</td>
+              {{ if .Responded }}
+              <td><i class="fa fa-check" aria-hidden="true"></i></td>
+              <td><button class="btn btn-dark" disabled onclick="respond('{{ .ID }}','{{ $enforcer }}')">Respond</button></td>
+              {{ else }}
+              <td><i class="fa fa-circle-xmark" aria-hidden="true"></i></td>
+              <td><button class="btn btn-primary" onclick="respond('{{ .ID }}','{{ $enforcer }}')">Respond</button></td>
+              {{ end }}
             </tr>
             {{ end }}
           </tbody>
@@ -33,4 +44,52 @@
 
 {{ define "script" }}
 <script src="/static/js/common.js"></script>
+<script>
+  var createdDate = $('.createdAt')
+  for(let i = 0; i < createdDate.length; i++){
+    createdDate[i].innerHTML = formatDate(createdDate[i].innerHTML)
+  }
+
+  function respond(id, enforcer_id){
+    console.log(id, enforcer_id);
+    let url = "/uadmin/api/d/notification/" + id +"/";
+    console.log('URL: ', url)
+    let formData = new FormData()
+    formData.append('_enforcer_id', enforcer_id);
+    formData.append('_responded', true);
+    fetch(url,{
+      method: "PUT",
+      headers: {
+        "X-CSRF-TOKEN": getCookie('session')
+      },
+      body: formData,
+    }).then(function (resp) {
+      console.log(resp)
+      location.reload();
+    })
+  }
+
+  function formatDate(dateString) {
+      // Remove the extra timezone information
+      const cleanedDateString = dateString.replace(' +0800 +0800', ' +0800');
+
+      // Create a new Date object
+      const date = new Date(cleanedDateString);
+
+      // Define options for formatting the date
+      const options = {
+        weekday: 'short', // "Wednesday"
+        year: 'numeric', // "2024"
+        month: 'long', // "June"
+        day: 'numeric', // "12"
+        hour: '2-digit', // "03 PM"
+        minute: '2-digit', // "43"
+        second: '2-digit', // "22"
+        // timeZoneName: 'short' // "GMT+8"
+      };
+
+      // Format the date
+      return date.toLocaleString('en-US', options);
+    }
+</script>
 {{ end }}

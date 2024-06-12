@@ -15,4 +15,5 @@ func NewNotification(w http.ResponseWriter, r *http.Request) {
 	notif.Emergency = r.FormValue("emergency")
 	notif.CreatedAt = time.Now()
 	uadmin.Save(&notif)
+	http.Redirect(w, r, "/mobile/help/", http.StatusSeeOther)
 }

@@ -213,6 +213,22 @@ func TransactionHandler(w http.ResponseWriter, r *http.Request) map[string]inter
 func NotificationsHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
 
+	notifications := []models.Notification{}
+	uadmin.All(&notifications)
+
+	for i := range notifications {
+		uadmin.Preload(&notifications[i])
+		uadmin.Preload(&notifications[i].Enforcer)
+	}
+
+	session := uadmin.IsAuthenticated(r)
+	enforcer := models.Enforcers{}
+	uadmin.Get(&enforcer, "user_id = ?", session.UserID)
+	uadmin.Preload(&enforcer)
+	uadmin.Preload(&enforcer.User)
+
+	context["Enforcer"] = enforcer
+	context["Notifications"] = &notifications
 	context["Title"] = "Notifications"
 	return context
 }

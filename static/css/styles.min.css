@@ -5371,8 +5371,8 @@ fieldset:disabled .btn {
   padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
   font-size: var(--bs-nav-link-font-size);
   font-weight: var(--bs-nav-link-font-weight);
-  /* color: var(--bs-nav-link-color); */
-  color: #fff;
+  color: var(--bs-nav-link-color);
+  /* color: #fff; */
   text-decoration: none;
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out
@@ -19651,7 +19651,7 @@ fieldset:disabled .btn {
 
 .left-sidebar {
   width: 270px;
-  background-color: #0b0e18;
+  background-color: #fff;
   position: absolute;
   -webkit-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
@@ -19700,7 +19700,7 @@ fieldset:disabled .btn {
 }
 
 .sidebar-nav ul .sidebar-item .sidebar-link {
-  color: #fff;
+  color: #000;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19766,7 +19766,7 @@ fieldset:disabled .btn {
   position: relative;
   z-index: 50;
   width: 100%;
-  background: #0b0e18;
+  background: #fff;
   color: #fff;
   padding: 0 25px
 }

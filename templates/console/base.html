@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 
 <head>
   <meta charset="utf-8">
@@ -146,7 +146,7 @@
     <div class="body-wrapper">
       <!--  Header Start -->
       <header class="app-header">
-        <nav class="navbar navbar-expand-lg navbar-light border-bottom">
+        <nav class="navbar navbar-expand-lg navbar-dark border-bottom">
           <ul class="navbar-nav">
             <li class="nav-item d-block d-xl-none">
               <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
@@ -175,11 +175,10 @@
                     <!-- <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-user fs-6"></i>
                       <p class="mb-0 fs-3">My Profile</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
                     </a> -->
+                    <div class="d-grid">
+                      <button class="btn btn-outline-primary mx-3 mt-2 btn-block" id="mode-btn">Mode</button>
+                    </div>
                     <a href="/logout/" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
@@ -209,6 +208,47 @@
     src="https://chatling.ai/js/embed.js"></script>
   <!-- <script src="/static/js/dashboard.js"></script> -->
   <script>
+    // Set the mode if dark or light
+    var mode = localStorage.getItem('mode');
+    if (mode == null) {
+      localStorage.setItem('mode', 'light');
+    }
+
+    if (mode == 'light') {
+      $('body').attr('data-bs-theme', 'light');
+      $('.app-header').css('background', '#fff')
+      $('.left-sidebar').css('background-color', '#fff')
+      $('.sidebar-link').css('color', '#000')
+      $('.nav-small-cap').css('color', '#2A3547')
+      $('.nav-link').css('color', '#2A3547')
+    }
+
+    if (mode == 'dark') {
+      $('body').attr('data-bs-theme', 'dark');
+      $('.app-header').css('background', '#212529')
+      $('.left-sidebar').css('background-color', '#212529')
+      $('.sidebar-link').css('color', '#fff')
+      $('.nav-small-cap').css('color', '#fff')
+    }
+
+
+    $('#mode-btn').on('click', function(){
+      let mode = localStorage.getItem('mode');
+      if (mode == null) {
+        localStorage.setItem('mode', 'light');
+      }else{
+        if (mode == 'light') {
+          localStorage.setItem('mode', 'dark');
+          window.location.reload();
+        }
+
+        if (mode == 'dark') {
+          localStorage.setItem('mode', 'light');
+          window.location.reload();
+        }
+      }
+    })
+
     var weather = {
       0 : "Clear Sky",
       1: "Mainly Clear",

@@ -8,4 +8,5 @@ type SMSSubscriber struct {
 	LastName     string
 	Address      string
 	MobileNumber string
+	EmailAddress string
 }

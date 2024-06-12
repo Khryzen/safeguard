@@ -15,7 +15,10 @@ func NewSMSUser(w http.ResponseWriter, r *http.Request) {
 		sms.LastName = r.FormValue("lastname")
 		sms.Address = r.FormValue("address")
 		sms.MobileNumber = r.FormValue("mobile")
+		sms.EmailAddress = r.FormValue("email")
 
 		uadmin.Save(&sms)
+
+		http.Redirect(w, r, "/register/", http.StatusSeeOther)
 	}
 }

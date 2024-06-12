@@ -1,6 +1,7 @@
 package models
 
 import (
+	"net/smtp"
 	"strconv"
 	"strings"
 	"time"
@@ -31,38 +32,29 @@ func (i *IncidentReport) Save() {
 
 	uadmin.Save(i)
 
+	report := IncidentReport{}
+	uadmin.Get(&report, "id = ?", i.ID)
+	uadmin.Preload(&report)
+	uadmin.Preload(&report.Disasters)
 	// apiKey := uadmin.GetSetting("SMSAPI").(string)
 	sms_users := []SMSSubscriber{}
 	uadmin.All(&sms_users)
-
-	// for j := range sms_users {
-	// 	sms := SMSRequest{
-	// 		From:    "Bongabong MDRRMO",
-	// 		To:      sms_users[j].MobileNumber,
-	// 		Message: i.IncidentDateStr + "\n" + i.Disasters.Name + "\n" + i.AlertLevel.Name + " at " + i.Location + "\n" + i.Remarks,
-	// 	}
-
-	// 	err := sendSMS(apiKey, sms)
-	// 	if err != nil {
-	// 		fmt.Println("Error:", err)
-	// 		return
-	// 	}
-	// 	fmt.Println("SMS sent successfully!")
-	// }
-
 	o := sms.Operator{
 		Type:     "SEMAPHORE",
 		Username: "71174e4de05abb5b79ac73a25d76fe9b",
-		// SenderName: "Safeguard",
+		// SenderName: "eSafeguard",
 	}
 
-	o.Message = i.IncidentDateStr + "\n" + i.Disasters.Name + "\n" + i.AlertLevel.Name + " at " + i.Location + "\n" + i.Remarks
+	o.Message = report.IncidentDateStr + "\n" + report.Disasters.Name + "\n" + report.AlertLevel.Name + " at " + report.Location + "\n" + report.Remarks
 	o.From = "Safeguard 24/7"
 	for j := range sms_users {
 		cell := ValidateCellPhone(sms_users[j].MobileNumber)
 		if cell != "" {
 			o.Phone = cell
 			o.SendSMS()
+		}
+		if sms_users[j].EmailAddress != "" {
+			SendEmail(sms_users[j].EmailAddress, o.Message)
 		}
 	}
 }
@@ -83,4 +75,25 @@ func ValidateCellPhone(cell string) string {
 		return ""
 	}
 	return cell
+}
+
+func SendEmail(recipient string, body string) {
+	from := "esafeguard2024@gmail.com"
+	password := "shcfingudhxjtkfp"
+	to := []string{recipient}
+
+	smtpHost := "smtp.gmail.com"
+	smtpPort := "587"
+
+	subject := "Subject: Disaster Notification\r\n"
+	message := []byte(subject + body)
+
+	auth := smtp.PlainAuth("", from, password, smtpHost)
+
+	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message)
+	if err != nil {
+		uadmin.Trail(uadmin.ERROR, "Unable to send email. %s", err.Error())
+		return
+	}
+	uadmin.Trail(uadmin.INFO, "Email sent successfully")
 }

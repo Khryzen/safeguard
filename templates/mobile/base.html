@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,14 @@
 <body>
   <main id="main_body">
     <div class="container p-3 pb-0 border-bottom bg-main" id="banner">
-      <h3>Welcome to Safeguard 24/7</h3>
+      <div class="row">
+        <div class="col-8">
+          <h5>Welcome to Safeguard 24/7</h5>
+        </div>
+        <div class="col-4">
+          <button id="mode-btn" class="btn btn-outline-primary">Mode</button>
+        </div>
+      </div>
     </div>
     {{ template "content" . }}
   </main>
@@ -53,6 +60,44 @@
     src="https://chatling.ai/js/embed.js"></script>
 <script>
   feather.replace();
+</script>
+<script>
+  var mode = localStorage.getItem('mode');
+    if (mode == null) {
+      localStorage.setItem('mode', 'light');
+    }
+
+    if (mode == 'light') {
+      $('body').attr('data-bs-theme', 'light');
+      $('.mobile-bottom-nav__item').css('background-color', '#fff')
+      $('#mode-btn').text('Dark');
+      $(':root').css('--bs-heading-color', '#212529');
+      }
+      
+      if (mode == 'dark') {
+        $('body').attr('data-bs-theme', 'dark');
+        $('.mobile-bottom-nav__item').css('background-color', '#212529')
+        $('#mode-btn').text('Light');
+        $(':root').css('--bs-heading-color', '#fff');
+    }
+
+    
+      $('#mode-btn').on('click', function () {
+        let mode = localStorage.getItem('mode');
+        if (mode == null) {
+          localStorage.setItem('mode', 'light');
+        } else {
+          if (mode == 'light') {
+            localStorage.setItem('mode', 'dark');
+            window.location.reload();
+          }
+
+          if (mode == 'dark') {
+            localStorage.setItem('mode', 'light');
+            window.location.reload();
+          }
+        }
+      })
 </script>
 {{ template "script" . }}
 

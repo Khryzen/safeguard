@@ -35,6 +35,8 @@ func APIHandler(w http.ResponseWriter, r *http.Request) {
 		NewTransaction(w, r)
 	case "new_notif":
 		NewNotification(w, r)
+	case "new_survey":
+		NewSurvey(w, r)
 	default:
 		InvalidAPI(w, r)
 	}

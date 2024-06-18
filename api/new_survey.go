@@ -22,11 +22,7 @@ func NewSurvey(w http.ResponseWriter, r *http.Request) {
 		survey.TrainingModules = StringToInt(r.FormValue("trainingModules"))
 		survey.Comments = r.FormValue("comments")
 		uadmin.Save(&survey)
-		uadmin.ReturnJSON(w, r, map[string]interface{}{
-			"status": "ok",
-			"msg":    "survey saved",
-		})
-		http.Redirect(w, r, "/survey/", http.StatusSeeOther)
+		http.Redirect(w, r, "/mobile/", http.StatusSeeOther)
 	} else {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		uadmin.ReturnJSON(w, r, map[string]interface{}{

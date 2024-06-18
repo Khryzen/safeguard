@@ -1,6 +1,7 @@
 package views
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -10,6 +11,16 @@ import (
 
 func DashboardHandler(w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	context := map[string]interface{}{}
+	// reports := []models.IncidentReport{}
+	var report []interface{}
+	disaster := []models.Disasters{}
+	uadmin.All(&disaster)
+	for i := range disaster {
+		ir := models.IncidentReport{}
+		x := uadmin.Count(&ir, "disasters_id = ?", disaster[i].ID)
+		report = append(report, fmt.Sprint(x)+":"+disaster[i].Name)
+	}
+
 	enforcers := models.Enforcers{}
 	active_enforcer := uadmin.Count(&enforcers, "active = ?", true)
 
@@ -44,6 +55,7 @@ func DashboardHandler(w http.ResponseWriter, r *http.Request) map[string]interfa
 	transactionChart := []models.Transaction{}
 	uadmin.FilterSorted("created_at", false, &transactionChart, "created_at > ? AND created_at < ?", month_start, month_end)
 
+	context["Report"] = report
 	context["Incidents"] = incidents
 	context["TransactionsChart"] = transactionChart
 	context["Enforcers"] = active_enforcer

@@ -209,6 +209,11 @@
     <h4>Transactions this Month (In and Out)</h4>
     <canvas id="transactionCharts"></canvas>
   </div>
+  <hr class="m-5">
+  <div class="col-6 col-md-12 col-sm-12">
+    <h4>Distribution of Reported Disaster</h4>
+    <canvas id="pieCharts"></canvas>
+  </div>
   </div>
 </div>
 {{ end }}
@@ -288,6 +293,57 @@ var incidents = new Chart(incidents_ctx, {
       responsive: true
     }
   });
+
+  let reports = []
+  {{ range .Report }}
+  reports.push('{{ . }}')
+  {{ end }}
+
+  let pieData = []
+  let pieLabel = []
+  let dataLength = reports.length
+
+  console.log('Reports: ', reports)
+  reports.forEach(val =>{
+    console.log(val)
+    pieData.push(val.split(":")[0])
+    pieLabel.push(val.split(":")[1])
+  })
+  
+  const pie_ctx = document.getElementById('pieCharts').getContext('2d');
+  const data = {
+    labels: pieLabel,
+    datasets: [{
+      data: pieData,
+      backgroundColor: generateRandomColors(dataLength),
+    }]
+  };
+
+  const config = {
+    type: 'pie',
+    data: data,
+  };
+
+  new Chart(pie_ctx, config);
+
+  function getRandomColor() {
+    // Generate random color in hexadecimal format
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function generateRandomColors(numColors) {
+    // Generate an array of random colors
+    const colors = [];
+    for (let i = 0; i < numColors; i++) {
+      colors.push(getRandomColor());
+    }
+    return colors;
+  }
 
 </script>
 {{ end }}

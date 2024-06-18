@@ -28,6 +28,7 @@ func main() {
 		// SMS Model
 		models.SMSSubscriber{},
 
+		models.Survey{},
 		sms.Operator{},
 	)
 

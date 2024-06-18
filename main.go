@@ -57,6 +57,7 @@ func main() {
 	http.HandleFunc("/console/", uadmin.Handler(views.ConsoleHandler))
 	http.HandleFunc("/console/login/", uadmin.Handler(views.ConsoleLoginHandler))
 	http.HandleFunc("/register/", uadmin.Handler(views.SMSRegister))
+	http.HandleFunc("/survey/", uadmin.Handler(views.SurveyHandler))
 	http.HandleFunc("/logout/", uadmin.Handler(views.LogoutHandler))
 
 	uadmin.PublicMedia = true

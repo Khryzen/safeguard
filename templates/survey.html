@@ -89,6 +89,7 @@
     }
 
     form input,
+    form textarea,
     form select {
       padding: 10px;
       border-radius: 8px;
@@ -103,7 +104,8 @@
     form input:focus,
     form select:focus,
     form input:hover,
-    form select:hover {
+    form select:hover,
+    form textarea:hover  {
       border: 1px solid var(--main-color);
     }
 
@@ -217,18 +219,77 @@
       <div>
         <li>
           <label>How satisfied are you with our realtime monitoring feature?</label>
-          <select name="rtMonitoring" id="navigate">
-            <option value="5">Very Easy</option>
-            <option value="4">Easy</option>
+          <select name="rtMonitoring" id="rtMonitoring">
+            <option value="5">Very Satisfied</option>
+            <option value="4">Satisfied</option>
             <option value="3">Neutral</option>
-            <option value="2">Difficult</option>
-            <option value="1">Very Difficult</option>
+            <option value="2">Dissatisfied</option>
+            <option value="1">Very Dissatisfied</option>
           </select>
         </li>
       <div>
+
+      <div>
+        <li>
+          <label>How satisfied are you with our SMS notification for alerts and warning feature?</label>
+          <select name="sms" id="sms">
+            <option value="5">Very Satisfied</option>
+            <option value="4">Satisfied</option>
+            <option value="3">Neutral</option>
+            <option value="2">Dissatisfied</option>
+            <option value="1">Very Dissatisfied</option>
+          </select>
+        </li>
+      <div>
+
+      <div>
+        <li>
+          <label>How satisfied are you with our Incident reporting feature?</label>
+          <select name="reporting" id="reporting">
+            <option value="5">Very Satisfied</option>
+            <option value="4">Satisfied</option>
+            <option value="3">Neutral</option>
+            <option value="2">Dissatisfied</option>
+            <option value="1">Very Dissatisfied</option>
+          </select>
+        </li>
+      <div>
+
+      <div>
+        <li>
+          <label>How satisfied are you with our Chatbot assistance feature?</label>
+          <select name="chatbot" id="chatbot">
+            <option value="5">Very Satisfied</option>
+            <option value="4">Satisfied</option>
+            <option value="3">Neutral</option>
+            <option value="2">Dissatisfied</option>
+            <option value="1">Very Dissatisfied</option>
+          </select>
+        </li>
+      <div>
+
+      <div>
+        <li>
+          <label>How helpful are the safety training modules provided by eSafeguard?</label>
+          <select name="trainingModules" id="trainingModules">
+            <option value="5">Very helpful</option>
+            <option value="4">Helpful</option>
+            <option value="3">Neutral</option>
+            <option value="2">Not helpful</option>
+            <option value="1">Not at all helpful</option>
+          </select>
+        </li>
+      <div>
+
+      <div>
+        <li>
+          <label>Comments and Suggestions</label>
+          <textarea name="comments" id="comments"></textarea>
+        </li>
+      </div>
         <small>
           <p>
-          By signing up, you will receive alerts and newsletters at your registered mobile number regarding the latest news and alerts.
+          Thank you for your time and feedback. Your input is crucial in helping us enhance eSafeGuard and ensure a safer community.
           </p>
         </small>
       </div>

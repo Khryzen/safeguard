@@ -26,12 +26,14 @@ func NewSurvey(w http.ResponseWriter, r *http.Request) {
 			"status": "ok",
 			"msg":    "survey saved",
 		})
+		http.Redirect(w, r, "/survey/", http.StatusSeeOther)
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		uadmin.ReturnJSON(w, r, map[string]interface{}{
+			"status": "error",
+			"msg":    "method not allowed",
+		})
 	}
-	w.WriteHeader(http.StatusMethodNotAllowed)
-	uadmin.ReturnJSON(w, r, map[string]interface{}{
-		"status": "error",
-		"msg":    "method not allowed",
-	})
 }
 
 func StringToInt(str string) int {

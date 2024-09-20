@@ -51,7 +51,7 @@ func (i *IncidentReport) Save() {
 		cell := ValidateCellPhone(sms_users[j].MobileNumber)
 		if cell != "" {
 			o.Phone = cell
-			// o.SendSMS()
+			o.SendSMS()
 		}
 		if sms_users[j].EmailAddress != "" {
 			// SendEmail(sms_users[j].EmailAddress, o.Message)

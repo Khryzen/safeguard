@@ -40,9 +40,9 @@ func (i *IncidentReport) Save() {
 	sms_users := []SMSSubscriber{}
 	uadmin.All(&sms_users)
 	o := sms.Operator{
-		Type:     "SEMAPHORE",
-		Username: "71174e4de05abb5b79ac73a25d76fe9b",
-		// SenderName: "eSafeguard",
+		Type:       "SEMAPHORE",
+		Username:   "71174e4de05abb5b79ac73a25d76fe9b",
+		SenderName: "eSafeGuard",
 	}
 
 	o.Message = report.IncidentDateStr + "\n" + report.Disasters.Name + "\n" + report.AlertLevel.Name + " at " + report.Location + "\n" + report.Remarks

@@ -45,7 +45,7 @@ func (i *IncidentReport) Save() {
 		SenderName: "eSafeGuard",
 	}
 
-	o.Message = report.IncidentDateStr + "\n" + report.Disasters.Name + "\n" + report.AlertLevel.Name + " at " + report.Location + "\n" + report.Remarks
+	o.Message = report.IncidentDateStr + "\n" + report.Disasters.Name + "\n" + report.AlertLevel.Name + " " + report.Location + "\n" + report.Remarks
 	o.From = "Safeguard 24/7"
 	for j := range sms_users {
 		cell := ValidateCellPhone(sms_users[j].MobileNumber)

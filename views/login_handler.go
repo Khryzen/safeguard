@@ -1,7 +1,6 @@
 package views
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/uadmin/uadmin"
@@ -20,7 +19,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		// Get the values from the forms
 		username := r.FormValue("username")
 		password := r.FormValue("password")
-		fmt.Println(username, password)
 		user := uadmin.User{}
 		uadmin.Get(&user, "username = ?", username)
 		session = user.Login(password, "")

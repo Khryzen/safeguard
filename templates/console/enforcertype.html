@@ -150,9 +150,10 @@
   $(document).ready(function () {
       $('#enforcerTypeTable').DataTable();
     });
+
   function openEnforcerType(id){
     $('#editEnforcerTypeModal').modal('show')
-     localStorage.setItem("EditEnforcerTypeID", id)
+      localStorage.setItem("EditEnforcerTypeID", id)
     $.ajax({
       url: "/uadmin/api/d/enforcertype/read/?id=" + id,
       method: "get",

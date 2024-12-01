@@ -83,12 +83,12 @@
         <form action="/api/new_incident_report/" method="post">
           <div class="container mb-2">
             <label for="incident_date">Incident Date:</label>
-            <input type="datetime-local" class="form-control" name="incident_date" id="incident_date">
+            <input type="datetime-local" class="form-control" name="incident_date" id="incident_date" required>
           </div>
           <div class="container mb-2">
             <label for="disaster">Disaster:</label>
-            <select class="form-control" name="disaster" id="disaster">
-              <option value="-" selected hidden>Choose...</option>
+            <select class="form-control" name="disaster" id="disaster" required>
+              <option value="" selected hidden>Choose...</option>
               {{ range .Disaster }}
               <option value="{{ .ID }}">{{ .Name }}</option>
               {{ end }}
@@ -96,8 +96,8 @@
           </div>
           <div class="container mb-2">
             <label for="alert_level">Alert Level:</label>
-            <select class="form-control" name="alert_level" id="alert_level">
-              <option value="-" selected hidden>Choose...</option>
+            <select class="form-control" name="alert_level" id="alert_level" required>
+              <option value="" selected hidden>Choose...</option>
               {{ range .Alerts }}
               <option value="{{ .ID }}">{{ .Name }}</option>
               {{ end }}
@@ -105,8 +105,8 @@
           </div>
           <div class="container mb-2">
             <label for="captain">Captain:</label>
-            <select class="form-control" name="captain" id="captain">
-              <option value="-" selected hidden>Choose...</option>
+            <select class="form-control" name="captain" id="captain" required>
+              <option value="" selected hidden>Choose...</option>
               {{ range .Enforcers }}
               <option value="{{ .ID }}">{{ .User.FirstName }} {{ .User.LastName }}</option>
               {{ end }}
@@ -122,7 +122,7 @@
           </div>
           <div class="container mb-2">
             <label for="casualties">Casualties:</label>
-            <input type="number" class="form-control" name="casualties" id="casualties">
+            <input type="number" class="form-control" name="casualties" id="casualties" required>
           </div>
           <div class="container mb-2">
             <label for="responded">Responded:</label>
@@ -228,8 +228,6 @@
 {{ end }}
 
 {{ define "script" }}
-
-
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>

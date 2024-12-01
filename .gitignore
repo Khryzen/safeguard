@@ -8,3 +8,6 @@ static/i18n/
 media
 uadmin.db
 safeguard
+static/i18n/
+*.exe
+*.log
